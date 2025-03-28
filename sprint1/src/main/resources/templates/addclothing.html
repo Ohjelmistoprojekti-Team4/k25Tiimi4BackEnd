@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en " xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Clothing</title>
+</head>
+
+<body>
+    <h1>Add Clothing</h1>
+    <form method="post" action="#" th:action="@{/addclothing}" th:object="${clothing}">
+        <p>Type:<input type="text" th:field="*{type}" placeholder="Type" /></p>
+        <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
+        <p>Size:<input type="text" th:field="*{size}" placeholder="Size" /></p>
+        <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
+        <p>Manufacturer:
+            <select th:field="*{manufacturer}">
+                <option value="">Select Manufacturer</option>
+                <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manufacturerId}"
+                    th:text="${manufacturer.name}">
+                </option>
+            </select>
+        </p>
+        <p><button type="submit">Add</button></p>
+
+    </form>
+
+</body>
+
+</html>

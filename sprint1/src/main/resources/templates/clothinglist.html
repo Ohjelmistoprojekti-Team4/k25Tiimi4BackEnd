@@ -23,9 +23,16 @@
                 <td th:text="${clothing.size}"></td>
                 <td th:text="${clothing.price}"></td>
                 <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}"></td>
+                <td>
+                    <form th:action="@{/clothings/delete/{id}(id=${clothing.clothingId})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
+    <br>
+<a href="/addclothing"><button>Add Clothing</button></a>
     
 </body>
 </html>

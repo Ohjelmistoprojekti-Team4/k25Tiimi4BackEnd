@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-Sprint1Application<sprint1>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "sprint1.sprint1.Sprint1Application",
+            "projectName": "sprint1",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
