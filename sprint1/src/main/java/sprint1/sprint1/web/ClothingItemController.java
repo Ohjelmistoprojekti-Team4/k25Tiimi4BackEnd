@@ -1,20 +1,17 @@
 package sprint1.sprint1.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
 import sprint1.sprint1.domain.ManufacturerRepository;
-
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
 
 
 @Controller
@@ -57,6 +54,23 @@ public class ClothingItemController {
         clothingItemRepository.deleteById(clothingId);
         return "redirect:/clothings";
     }
-    
+
+    @GetMapping("/clothings/edit/{id}")
+    public String editClothingItem(@PathVariable("id") Long clothingId, Model model) {
+        Optional<ClothingItem> clothing = clothingItemRepository.findById(clothingId);
+
+        if (clothing.isPresent()) {
+            model.addAttribute("clothing", clothing.get());
+            model.addAttribute("manufacturers", manufacturerRepository.findAll());
+        }
+
+        return "editclothing";
+    }
+
+    @PostMapping("/clothings/edit/save")
+    public String saveEditedClothing(@ModelAttribute ClothingItem clothing) {
+        clothingItemRepository.save(clothing);
+        return "redirect:/clothings";
+    }
     
 }
