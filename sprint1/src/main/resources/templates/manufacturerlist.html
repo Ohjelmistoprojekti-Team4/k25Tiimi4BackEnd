@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Manufacturer List</title>
+</head>
+
+<body>
+    <h1>Manufacturers</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="manufacturer : ${manufacturers}">
+                <td th:text="${manufacturer.name}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/addmanufacturer"><button>Add manufacturer</button></a>
+    <a href="/clothings"><button>View clothing items</button></a>
+</body>
+
+</html>

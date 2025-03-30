@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Clothing List</title>
 </head>
+
 <body>
     <h1>Clothing Items</h1>
-    <br>
     <table>
         <thead>
             <th>Type</th>
@@ -22,20 +24,22 @@
                 <td th:text="${clothing.color}"></td>
                 <td th:text="${clothing.size}"></td>
                 <td th:text="${clothing.price}"></td>
-                <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}"></td>
+                <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}">
+                </td>
+                <td>
+                    <a th:href="@{clothings/edit/{id}(id=${clothing.clothingId})}"><button>Edit</button></a>
+                </td>
                 <td>
                     <form th:action="@{/clothings/delete/{id}(id=${clothing.clothingId})}" method="post">
                         <button type="submit">Delete</button>
                     </form>
                 </td>
-                <td>
-                    <a th:href="@{clothings/edit/{id}(id=${clothing.clothingId})}"><button>Edit</button></a>
-                </td>
             </tr>
         </tbody>
     </table>
     <br>
-<a href="/addclothing"><button>Add Clothing</button></a>
-    
+    <a href="/addclothing"><button>Add Clothing</button></a>
+    <a href="/manufacturers"><button>View manufacturers</button></a>
 </body>
+
 </html>
