@@ -3,6 +3,8 @@ package sprint1.sprint1.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,8 +19,10 @@ public class ClothingItem {
     private Long clothingId;
     private String type;
     private String color;
-    private String size;
     private double price;
+
+    @Enumerated(EnumType.STRING)
+    private Size size;
     
     @ManyToOne
     @JsonIgnoreProperties ("clothes")
@@ -27,7 +31,7 @@ public class ClothingItem {
 
     public ClothingItem() {}
 
-    public ClothingItem(String type, String color, String size, double price,
+    public ClothingItem(String type, String color, Size size, double price,
             Manufacturer manufacturer) {
         super();
         this.type = type;
@@ -61,11 +65,11 @@ public class ClothingItem {
         this.color = color;
     }
 
-    public String getSize() {
+    public Size getSize() {
         return size;
     }
 
-    public void setSize(String size) {
+    public void setSize(Size size) {
         this.size = size;
     }
 

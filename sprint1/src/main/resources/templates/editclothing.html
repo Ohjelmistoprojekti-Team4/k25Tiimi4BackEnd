@@ -14,8 +14,12 @@
         <input type="hidden" th:field="*{clothingId}" />
         <p>Type:<input type="text" th:field="*{type}" placeholder="Type" /></p>
         <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
-        <p>Size:<input type="text" th:field="*{size}" placeholder="Size" /></p>
         <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
+        <p>Size:
+            <select th:field="*{size}">
+                <option th:each="size : ${T(sprint1.sprint1.domain.Size).values()}" th:value="${size}" th:text="${size}"></option>
+            </select>
+        </p>
         <p>Manufacturer:
             <select th:field="*{manufacturer}">
                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.name}"></option>
