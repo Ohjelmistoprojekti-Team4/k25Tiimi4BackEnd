@@ -15,7 +15,7 @@ public class ManufacturerController {
     @Autowired
     ManufacturerRepository mrepository;
 
-    @GetMapping("/manufacturers")
+    @GetMapping("/manufacturerlist")
     public String showManufacturers(Model model) {
         model.addAttribute("manufacturers", mrepository.findAll());
         return "manufacturerlist";

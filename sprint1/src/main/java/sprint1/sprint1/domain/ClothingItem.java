@@ -21,7 +21,7 @@ public class ClothingItem {
     private double price;
     
     @ManyToOne
-    @JsonIgnoreProperties ("clothingItems")
+    @JsonIgnoreProperties ("clothes")
     @JoinColumn(name = "manufacturerId")
     private Manufacturer manufacturer;
 
