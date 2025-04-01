@@ -21,7 +21,7 @@ public class ClothingItemRestController {
     }
 
     @GetMapping("/clothes")
-    public @ResponseBody List<ClothingItem> getAllClothes() {
+    public @ResponseBody List<ClothingItem> getAllClothesRest() {
         return (List<ClothingItem>) clothingItemRepository.findAll();
     }
 
