@@ -12,7 +12,11 @@
     <h1>Edit Clothing</h1>
     <form method="post" th:action="@{/clothings/edit/save}" th:object="${clothing}">
         <input type="hidden" th:field="*{clothingId}" />
-        <p>Type:<input type="text" th:field="*{type}" placeholder="Type" /></p>
+        <p>Type:
+            <select th:field="*{type}">
+                <option th:each="type : ${T(sprint1.sprint1.domain.Type).values()}" th:value="${type}" th:text="${type}"></option>
+            </select>
+        </p>
         <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
         <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
         <p>Size:
