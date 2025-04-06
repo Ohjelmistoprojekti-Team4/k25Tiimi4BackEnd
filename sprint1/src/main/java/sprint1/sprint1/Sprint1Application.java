@@ -10,6 +10,8 @@ import sprint1.sprint1.domain.ClothingItemRepository;
 import sprint1.sprint1.domain.Manufacturer;
 import sprint1.sprint1.domain.ManufacturerRepository;
 import sprint1.sprint1.domain.Size;
+import sprint1.sprint1.domain.Toy;
+import sprint1.sprint1.domain.ToyRepository;
 import sprint1.sprint1.domain.Type;
 
 @SpringBootApplication
@@ -20,16 +22,20 @@ public class Sprint1Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository,
+	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository,
 			ManufacturerRepository manufacturerRepository) {
 				return (args) -> {
 					Manufacturer rukka = manufacturerRepository.save(new Manufacturer("Rukka"));
 					Manufacturer reima = manufacturerRepository.save(new Manufacturer("Reima"));
-					Manufacturer nike = manufacturerRepository.save(new Manufacturer("Nike"));
+					Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
 
-					clothingItemRepository.save(new ClothingItem(Type.Clothing, "Red", Size.M, 99.99, rukka));
-					clothingItemRepository.save(new ClothingItem(Type.Clothing, "Blue", Size.L, 49.99, rukka));
-					clothingItemRepository.save(new ClothingItem(Type.Clothing, "Black", Size.S, 19.99, reima));
+					clothingItemRepository.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", Size.M));
+					clothingItemRepository.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", Size.S));
+					clothingItemRepository.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", Size.L));
+
+					toyRepository.save(new Toy("Köysilelu", 4.99, Type.TOY, rekku, "Cotton"));
+					toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
+					
 				};
 		
 	}

@@ -20,7 +20,7 @@ public class ManufacturerRestController {
         this.manufacturerRepository = manufacturerRepository;
     }
 
-    @GetMapping("/manufacturers")
+    @GetMapping("/api/manufacturers")
     public @ResponseBody List<Manufacturer> getAllManufacturersRest() {
         return (List<Manufacturer>) manufacturerRepository.findAll();
     }

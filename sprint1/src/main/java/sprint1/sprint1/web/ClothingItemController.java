@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
 import sprint1.sprint1.domain.ManufacturerRepository;
+import sprint1.sprint1.domain.Type;
 
 
 @Controller
@@ -32,7 +33,7 @@ public class ClothingItemController {
     @GetMapping("/clothings")
     public String showClothings(Model model) {
         model.addAttribute("clothings", clothingItemRepository.findAll());
-        return "clothinglist";
+        return "clothingItemlist";
     }
 
     @GetMapping("/addclothing")
@@ -44,15 +45,15 @@ public class ClothingItemController {
 
     @PostMapping("/addclothing")
     public String addClothingPost(@ModelAttribute ClothingItem clothingItem) {
-        
+        clothingItem.setType(Type.CLOTHING);
         clothingItemRepository.save(clothingItem);
-        return "redirect:/clothings";
+        return "redirect:/productlist";
     }
    
     @PostMapping("/clothings/delete/{id}")
     public String deleteClothing(@PathVariable("id") Long clothingId) {
         clothingItemRepository.deleteById(clothingId);
-        return "redirect:/clothings";
+        return "redirect:/productlist";
     }
 
     @GetMapping("/clothings/edit/{id}")
@@ -68,9 +69,10 @@ public class ClothingItemController {
     }
 
     @PostMapping("/clothings/edit/save")
-    public String saveEditedClothing(@ModelAttribute ClothingItem clothing) {
-        clothingItemRepository.save(clothing);
-        return "redirect:/clothings";
+    public String saveEditedClothing(@ModelAttribute ClothingItem clothingItem) {
+        clothingItem.setType(Type.CLOTHING);
+        clothingItemRepository.save(clothingItem);
+        return "redirect:/productlist";
     }
     
 }

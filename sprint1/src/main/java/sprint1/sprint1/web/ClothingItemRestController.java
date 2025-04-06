@@ -20,7 +20,7 @@ public class ClothingItemRestController {
         this.clothingItemRepository = clothingItemRepository;
     }
 
-    @GetMapping("/clothes")
+    @GetMapping("/api/clothes")
     public @ResponseBody List<ClothingItem> getAllClothesRest() {
         return (List<ClothingItem>) clothingItemRepository.findAll();
     }

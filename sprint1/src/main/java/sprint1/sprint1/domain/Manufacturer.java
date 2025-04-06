@@ -21,7 +21,7 @@ public class Manufacturer {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
     @JsonIgnoreProperties ("manufacturer")
-    private List<ClothingItem> clothes;
+    private List<Product> products;
 
     public Manufacturer() {}
 
@@ -46,12 +46,12 @@ public class Manufacturer {
         this.name = name;
     }
 
-    public List<ClothingItem> getClothes() {
-        return clothes;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setClothes(List<ClothingItem> clothes) {
-        this.clothes = clothes;
+    public void setClothes(List<Product> products) {
+        this.products = products;
     }
 
     @Override
