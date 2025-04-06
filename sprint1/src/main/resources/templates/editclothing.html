@@ -11,22 +11,18 @@
 
     <h1>Edit Clothing</h1>
     <form method="post" th:action="@{/clothings/edit/save}" th:object="${clothing}">
-        <input type="hidden" th:field="*{clothingId}" />
-        <p>Type:
-            <select th:field="*{type}">
-                <option th:each="type : ${T(sprint1.sprint1.domain.Type).values()}" th:value="${type}" th:text="${type}"></option>
-            </select>
-        </p>
-        <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
+        <input type="hidden" th:field="*{productId}" />
+        <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
         <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
-        <p>Size:
-            <select th:field="*{size}">
-                <option th:each="size : ${T(sprint1.sprint1.domain.Size).values()}" th:value="${size}" th:text="${size}"></option>
-            </select>
-        </p>
         <p>Manufacturer:
             <select th:field="*{manufacturer}">
                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.name}"></option>
+            </select>
+        </p>
+        <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
+        <p>Size:
+            <select th:field="*{size}">
+                <option th:each="size : ${T(sprint1.sprint1.domain.Size).values()}" th:value="${size}" th:text="${size}"></option>
             </select>
         </p>
         <button type="submit">Save changes</button>

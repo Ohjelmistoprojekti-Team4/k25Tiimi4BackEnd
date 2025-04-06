@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Product List</title>
+</head>
+
+<body>
+    <h1>Products</h1>
+    <table>
+        <thead>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Type</th>
+            <th>Manufacturer</th>
+            <th>Color</th>
+            <th>Size</th>
+            <th>Material</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr th:each="clothing : ${clothings}">
+                <td th:text="${clothing.name}"></td>
+                <td th:text="${clothing.price}"></td>
+                <td th:text="${clothing.type.displayValue}"></td>
+                <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}"></td>
+                <td th:text="${clothing.color}"></td>
+                <td th:text="${clothing.size}"></td>
+                <td></td>
+                <td>
+                    <a th:href="@{clothings/edit/{id}(id=${clothing.productId})}"><button>Edit</button></a>
+                </td>
+                <td>
+                    <form th:action="@{/clothings/delete/{id}(id=${clothing.productId})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:each="toy : ${toys}">
+                <td th:text="${toy.name}"></td>
+                <td th:text="${toy.price}"></td>
+                <td th:text="${toy.type.displayValue}"></td>
+                <td th:text="${toy.manufacturer != null ? toy.manufacturer.name : 'Unknown Manufactorer'}"></td>
+                <td></td>
+                <td></td>
+                <td th:text="${toy.material}"></td>
+                <td>
+                    <a th:href="@{toys/edit/{id}(id=${toy.productId})}"><button>Edit</button></a>
+                </td>
+                <td>
+                    <form th:action="@{/toys/delete/{id}(id=${toy.productId})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+
+
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/addclothing"><button>Add Clothing</button></a>
+    <a href="/addtoy"><button>Add Toy</button></a>
+    <a href="/manufacturerlist"><button>View manufacturers</button></a>
+</body>
+
+</html>

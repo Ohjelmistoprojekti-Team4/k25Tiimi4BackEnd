@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Clothing</title>
+    <title>Edit Toy</title>
 </head>
-
 <body>
-    <h1>Add Clothing</h1>
-    <form method="post" th:action="@{/addclothing}" th:object="${clothing}">
+    <h1>Edit Toy</h1>
+    <form method="post" th:action="@{/toys/edit/save}" th:object="${toy}">
+        <input type="hidden" th:field="*{productId}" />
         <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
         <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
         <p>Manufacturer:
@@ -17,16 +16,8 @@
                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.name}"></option>
             </select>
         </p>
-        <p>Color:<input type="text" th:field="*{color}" placeholder="Color" /></p>
-        <p>Size:
-            <select th:field="*{size}">
-                <option th:each="size : ${T(sprint1.sprint1.domain.Size).values()}" th:value="${size}" th:text="${size}"></option>
-            </select>
-        </p>
-        
-        <p><button type="submit">Add</button></p>
-    </form>
-
+        <p>Material:<input type="text" th:field="*{material}" placeholder="Material" /></p>
+        <button type="submit">Save changes</button>
+    </form>    
 </body>
-
 </html>
