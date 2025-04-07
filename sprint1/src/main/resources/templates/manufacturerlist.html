@@ -14,11 +14,17 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="manufacturer : ${manufacturers}">
                 <td th:text="${manufacturer.name}"></td>
+                <td>
+                    <form th:action="@{/deletemanufacturer/{id}(id=${manufacturer.manufacturerId})}" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         </tbody>
     </table>
