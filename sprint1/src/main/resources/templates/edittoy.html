@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Edit Toy</title>
 </head>
 <body>
@@ -10,14 +11,21 @@
     <form method="post" th:action="@{/toys/edit/save}" th:object="${toy}">
         <input type="hidden" th:field="*{productId}" />
         <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
-        <p>Price:<input type="text" th:field="*{price}" placeholder="Price" /></p>
+        <p th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></p>
+        
+        <p>Price:<input type="number" step="0.01" th:field="*{price}" placeholder="Price" /></p>
+        <p th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}"></p>
+
         <p>Manufacturer:
             <select th:field="*{manufacturer}">
                 <option th:each="manufacturer : ${manufacturers}" th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.name}"></option>
             </select>
         </p>
+        
         <p>Material:<input type="text" th:field="*{material}" placeholder="Material" /></p>
+        <p th:if="${#fields.hasErrors('material')}" class="error" th:errors="*{material}"></p>
+
         <button type="submit">Save changes</button>
-    </form>    
+    </form>
 </body>
 </html>

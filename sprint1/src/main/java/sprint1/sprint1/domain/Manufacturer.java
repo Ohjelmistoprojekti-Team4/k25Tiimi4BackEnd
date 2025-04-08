@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Manufacturer {
@@ -17,6 +19,9 @@ public class Manufacturer {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long manufacturerId;
+
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Must be between 2-50 characters")
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")

@@ -13,6 +13,11 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.DecimalMax;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,16 +26,21 @@ public abstract class Product {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long productId;
 
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 50, message = "Must be between 2-50 characters")
     @Column(name="name")
     private String name;
 
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.01", message = "Price must be higher than 0")
+    @DecimalMax(value = "10000.00", message = "Price must be lower than 10 000")
     @Column(name="price")
-    private double price;
+    private Double price;
 
     @Column(name="type")
     @Enumerated(EnumType.STRING)
-    private Type type; 
-    
+    private Type type;
+
     @ManyToOne
     @JsonIgnoreProperties ("products")
     @JoinColumn(name = "manufacturerId")
@@ -38,7 +48,7 @@ public abstract class Product {
 
     public Product() {}
 
-    public Product(String name, double price, Type type, Manufacturer manufacturer) {
+    public Product(String name, Double price, Type type, Manufacturer manufacturer) {
         super();
         this.name = name;
         this.price = price;
@@ -62,11 +72,11 @@ public abstract class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
