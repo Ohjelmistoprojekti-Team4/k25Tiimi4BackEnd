@@ -4,19 +4,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @PrimaryKeyJoinColumn(name = "clothingId")
 public class ClothingItem extends Product {
 
+    @NotBlank(message = "Color is required")
+    @Size(min = 2, max = 20, message = "Must be between 2-20 characters")
     private String color;
 
     @Enumerated(EnumType.STRING)
-    private Size size;
+    private ClothingSize size;
     
     public ClothingItem() {}
 
-    public ClothingItem(String name, double price, Type type, Manufacturer manufacturer, String color, Size size) {
+    public ClothingItem(String name, Double price, Type type, Manufacturer manufacturer, String color, ClothingSize size) {
         super(name, price, type, manufacturer);
         this.color = color;
         this.size = size;
@@ -30,11 +34,11 @@ public class ClothingItem extends Product {
         this.color = color;
     }
 
-    public Size getSize() {
+    public ClothingSize getSize() {
         return size;
     }
 
-    public void setSize(Size size) {
+    public void setSize(ClothingSize size) {
         this.size = size;
     }
 
@@ -42,9 +46,5 @@ public class ClothingItem extends Product {
     public String toString() {
         return super.toString() + "ClothingItem [color=" + color + ", size=" + size + "]";
     }
-
-    
-
-    
 
 }

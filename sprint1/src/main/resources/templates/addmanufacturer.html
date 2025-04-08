@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/style.css">
     <title>Add Manufacturer</title>
 </head>
 
@@ -11,6 +12,8 @@
     <h1>Add Manufacturer</h1>
     <form method="post" th:action="@{/savemanufacturer}" th:object="${manufacturer}">
         <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
+        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></p>
+
         <button type="submit">Add</button>
     </form>
 </body>
