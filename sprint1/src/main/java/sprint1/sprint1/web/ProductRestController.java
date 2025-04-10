@@ -3,6 +3,7 @@ package sprint1.sprint1.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import sprint1.sprint1.domain.Toy;
 import sprint1.sprint1.domain.ToyRepository;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductRestController {
 
     private final ClothingItemRepository clothingItemRepository;
