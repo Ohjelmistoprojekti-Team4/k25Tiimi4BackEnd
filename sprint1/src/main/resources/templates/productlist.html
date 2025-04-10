@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <title>Product List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -26,18 +28,48 @@
                 <td th:text="${clothing.name}"></td>
                 <td th:text="${clothing.price}"></td>
                 <td th:text="${clothing.type.displayValue}"></td>
-                <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}"></td>
+                <td th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufactorer'}">
+                </td>
                 <td th:text="${clothing.color}"></td>
                 <td th:text="${clothing.size}"></td>
                 <td></td>
                 <td>
-                    <a th:href="@{clothings/edit/{id}(id=${clothing.productId})}"><button>Edit</button></a>
+                    <a th:href="@{clothings/edit/{id}(id=${clothing.productId})}">
+                        <button class="btn btn-primary">Edit</button>
+                    </a>
                 </td>
                 <td>
                     <form th:action="@{/clothings/delete/{id}(id=${clothing.productId})}" method="post">
-                        <button type="submit">Delete</button>
+                        <button type="button" class="btn btn-danger"
+                            th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalClothing' + ${clothing.productId}">
+                            Delete
+                        </button>
                     </form>
+                    <div class="modal fade" th:id="'deleteModalClothing' + ${clothing.productId}" tabindex="-1"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Vahvista poisto</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Sulje"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Haluatko varmasti poistaa tuotteen <b th:text="${clothing.name}"></b>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Peruuta</button>
+                                    <form th:id="'deleteFormClothing' + ${clothing.productId}"
+                                        th:action="@{/clothings/delete/{id}(id=${clothing.productId})}" method="post">
+                                        <button type="submit" class="btn btn-danger">Kyllä</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
+
             </tr>
             <tr th:each="toy : ${toys}">
                 <td th:text="${toy.name}"></td>
@@ -48,25 +80,50 @@
                 <td></td>
                 <td th:text="${toy.material}"></td>
                 <td>
-                    <a th:href="@{toys/edit/{id}(id=${toy.productId})}"><button>Edit</button></a>
+                    <a th:href="@{toys/edit/{id}(id=${toy.productId})}">
+                        <button class="btn btn-primary">Edit</button>
+                    </a>
                 </td>
                 <td>
                     <form th:action="@{/toys/delete/{id}(id=${toy.productId})}" method="post">
-                        <button type="submit">Delete</button>
+                        <button type="button" class="btn btn-danger"
+                            th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalToy' + ${toy.productId}">
+                            Delete
+                        </button>
                     </form>
+                    <div class="modal fade" th:id="'deleteModalToy' + ${toy.productId}" tabindex="-1"
+                        aria-labelledby="deleteModalLabelToy" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Vahvista poisto</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Sulje"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Haluatko varmasti poistaa lelun <b th:text="${toy.name}"></b>?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Peruuta</button>
+                                    <form th:action="@{/toys/delete/{id}(id=${toy.productId})}" method="post">
+                                        <button type="submit" class="btn btn-danger">Kyllä</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </td>
-
-
             </tr>
         </tbody>
     </table>
     <br>
-    <a href="/addclothing"><button>Add Clothing</button></a>
-    <a href="/addtoy"><button>Add Toy</button></a>
-    <a href="/manufacturerlist"><button>View manufacturers</button></a>
+    <a href="/addclothing"><button class="btn btn-success">Add Clothing</button></a>
+    <a href="/addtoy"><button class="btn btn-success">Add Toy</button></a>
+    <a href="/manufacturerlist"><button class="btn btn-primary">View manufacturers</button></a>
     <br>
     <br>
-    <a href="/"><button>Back to main page</button></a>
+    <a href="/"><button class="btn btn-secondary">Back to main page</button></a>
 
 </body>
 
