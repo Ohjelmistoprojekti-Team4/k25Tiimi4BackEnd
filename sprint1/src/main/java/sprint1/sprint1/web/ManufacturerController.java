@@ -41,7 +41,6 @@ public class ManufacturerController {
         return "addmanufacturer";
     }
 
-    // TODO: check if validation works
     @PostMapping("/savemanufacturer")
     public String saveManufacturer(@Valid Manufacturer manufacturer, BindingResult result, Model model) {
         if (result.hasErrors()) {

@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Bean;
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
 import sprint1.sprint1.domain.ClothingSize;
+import sprint1.sprint1.domain.Food;
+import sprint1.sprint1.domain.FoodRepository;
 import sprint1.sprint1.domain.Manufacturer;
 import sprint1.sprint1.domain.ManufacturerRepository;
 import sprint1.sprint1.domain.Toy;
@@ -22,7 +24,7 @@ public class Sprint1Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository,
+	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository, FoodRepository foodRepository,
 			ManufacturerRepository manufacturerRepository) {
 				return (args) -> {
 					Manufacturer rukka = manufacturerRepository.save(new Manufacturer("Rukka"));
@@ -33,8 +35,11 @@ public class Sprint1Application {
 					clothingItemRepository.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
 					clothingItemRepository.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
 
-					toyRepository.save(new Toy("Köysilelu", 4.99, Type.TOY, rekku, "Cotton"));
+					toyRepository.save(new Toy("Rope Toy", 4.99, Type.TOY, rekku, "Cotton"));
 					toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
+
+					foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, Type.FOOD, rekku, "Chicken"));
+					foodRepository.save(new Food("Premium Salmon Delight", 14.99, Type.FOOD, rekku, "Salmon"));
 					
 				};
 		
