@@ -55,7 +55,8 @@ public class Manufacturer {
         return products;
     }
 
-    public void setClothes(List<Product> products) {
+    //public void setClothes(List<Product> products) {
+        public void setProducts(List<Product> products) {
         this.products = products;
     }
 
@@ -63,11 +64,4 @@ public class Manufacturer {
     public String toString() {
         return "Manufacturer [manufacturerId=" + manufacturerId + ", name=" + name + "]";
     }
-
-    
-
-    
-
-
-
 }

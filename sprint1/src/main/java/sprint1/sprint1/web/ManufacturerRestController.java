@@ -24,5 +24,4 @@ public class ManufacturerRestController {
     public @ResponseBody List<Manufacturer> getAllManufacturersRest() {
         return (List<Manufacturer>) manufacturerRepository.findAll();
     }
-
 }
