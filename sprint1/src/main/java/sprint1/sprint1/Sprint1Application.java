@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
@@ -12,9 +13,12 @@ import sprint1.sprint1.domain.Food;
 import sprint1.sprint1.domain.FoodRepository;
 import sprint1.sprint1.domain.Manufacturer;
 import sprint1.sprint1.domain.ManufacturerRepository;
+import sprint1.sprint1.domain.Role;
 import sprint1.sprint1.domain.Toy;
 import sprint1.sprint1.domain.ToyRepository;
 import sprint1.sprint1.domain.Type;
+import sprint1.sprint1.domain.User;
+import sprint1.sprint1.domain.UserRepository;
 
 @SpringBootApplication
 public class Sprint1Application {
@@ -25,7 +29,7 @@ public class Sprint1Application {
 
 	@Bean
 	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository, FoodRepository foodRepository,
-			ManufacturerRepository manufacturerRepository) {
+			ManufacturerRepository manufacturerRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
 				return (args) -> {
 					Manufacturer rukka = manufacturerRepository.save(new Manufacturer("Rukka"));
 					Manufacturer reima = manufacturerRepository.save(new Manufacturer("Reima"));
@@ -41,6 +45,15 @@ public class Sprint1Application {
 					foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, Type.FOOD, rekku, "Chicken"));
 					foodRepository.save(new Food("Premium Salmon Delight", 14.99, Type.FOOD, rekku, "Salmon"));
 					
+
+					if (userRepository.findByUsername("admin").isEmpty()) {
+						userRepository.save(new User(
+								"admin",
+								passwordEncoder.encode("admin"),
+								Role.ADMIN));
+								System.out.println("Admin user created with username: admin and password: admin");		 
+					}
+
 				};
 		
 	}
