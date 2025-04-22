@@ -50,3 +50,9 @@ button {
 button:hover {
     background-color: #218838;
 }
+.logout{
+    background-color: #dc3545;
+}
+.logout:hover{
+    background-color: #910816;
+}

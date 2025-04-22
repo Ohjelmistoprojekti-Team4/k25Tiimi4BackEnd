@@ -16,6 +16,11 @@ public class MainController {
 
     @GetMapping("/")
     public String redirectToIndex() {
-        return "redirect:/index"; 
+        return "redirect:/index";
+    }
+    
+    @GetMapping("/login")
+    public String login() {
+        return "login";
     }
 }

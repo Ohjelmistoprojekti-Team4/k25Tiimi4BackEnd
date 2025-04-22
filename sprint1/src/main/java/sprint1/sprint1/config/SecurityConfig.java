@@ -29,16 +29,21 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().hasRole("ADMIN"))
                 .formLogin(login -> login
-
+                        .loginPage("/login")
                         .defaultSuccessUrl("/index", true)
+                        .failureUrl("/login?error")
                         .permitAll())
                 .logout(logout -> logout
 
                         .logoutSuccessUrl("/login?logout")
                         .permitAll())
-                .csrf(Customizer.withDefaults());
+                .csrf(csrf -> csrf.disable());
+                        
+                //.csrf(Customizer.withDefaults());
 
         return http.build();
     }
