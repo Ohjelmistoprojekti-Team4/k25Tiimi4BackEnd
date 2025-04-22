@@ -17,7 +17,7 @@ import sprint1.sprint1.domain.Toy;
 import sprint1.sprint1.domain.ToyRepository;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductRestController {
 
     private final FoodRepository foodRepository;
