@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.Valid;
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
+import sprint1.sprint1.domain.Food;
+import sprint1.sprint1.domain.FoodRepository;
 import sprint1.sprint1.domain.Manufacturer;
 import sprint1.sprint1.domain.ManufacturerRepository;
 import sprint1.sprint1.domain.Toy;
@@ -28,6 +30,8 @@ public class ManufacturerController {
     ToyRepository toyRepository;
     @Autowired
     ClothingItemRepository clothingItemRepository;
+    @Autowired
+    FoodRepository foodRepository;
 
     @GetMapping("/manufacturerlist")
     public String showManufacturers(Model model) {
@@ -63,9 +67,11 @@ public class ManufacturerController {
         Manufacturer manufacturer = mrepository.findById(id).orElse(null);
         List<Toy> toys = toyRepository.findByManufacturer(manufacturer);
         List<ClothingItem> clothingItems = clothingItemRepository.findByManufacturer(manufacturer);
+        List<Food> food = foodRepository.findByManufacturer(manufacturer);
         model.addAttribute("manufacturer", manufacturer);
         model.addAttribute("toys", toys);
         model.addAttribute("clothingItems", clothingItems);
+        model.addAttribute("food", food);
         return "products-by-manufacturer";
     }
 
