@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää tuote</title>
+</head>
+<body>
+
+    <h2>Valitse lisättävä tuotetyyppi</h2>
+
+    <select onchange="location = '/add/' + this.value">
+        <option disabled selected>Valitse tyyppi</option>
+        <option th:each="type : ${productTypes}"
+                th:value="${type}"
+                th:text="${type}">
+        </option>
+    </select>
+    
+</body>
+</html>
