@@ -18,7 +18,7 @@
     </p>
 
     <!-- CLOTHING -->
-    <div th:if="${product instanceof T(sprint1.sprint1.domain.ClothingItem)}">
+    <div th:if="${productType == T(sprint1.sprint1.domain.Type).CLOTHING}">
         <p>
             Color:<input type="text" th:field="*{color}" placeholder="Color" />
         </p>
@@ -34,13 +34,13 @@
     </div>
 
     <!-- TOY -->
-    <div th:if="${product instanceof T(sprint1.sprint1.domain.Toy)}">
+    <div th:if="${productType == T(sprint1.sprint1.domain.Type).TOY}">
         <p>Material:<input type="text" th:field="*{material}" placeholder="Material" /></p>
         <p th:if="${#fields.hasErrors('material')}" class="error" th:errors="*{material}"></p>
     </div>
 
     <!-- FOOD -->
-    <div th:if="${product instanceof T(sprint1.sprint1.domain.Food)}">
+    <div th:if="${productType == T(sprint1.sprint1.domain.Type).FOOD}">
         <p>Flavor:<input type="text" th:field="*{flavor}" placeholder="Flavor" /></p>
         <p th:if="${#fields.hasErrors('flavor')}" class="error" th:errors="*{flavor}"></p>
     </div>

@@ -48,8 +48,9 @@ public class ProductController {
             case TOY -> model.addAttribute("product", new Toy());
             case FOOD -> model.addAttribute("product", new Food());
         }
+        model.addAttribute("productType", type);
         model.addAttribute("formAction", "/add/" + type.name().toLowerCase());
-        model.addAttribute("manufacturers", manufacturerRepository.findAll());                                                                    // kaikille tyypeille
+        model.addAttribute("manufacturers", manufacturerRepository.findAll());
         return "addproduct";
     }
 
