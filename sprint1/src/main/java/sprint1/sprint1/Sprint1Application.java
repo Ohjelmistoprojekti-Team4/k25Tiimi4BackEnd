@@ -29,33 +29,49 @@ public class Sprint1Application {
 
 	@Bean
 	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository, FoodRepository foodRepository,
-			ManufacturerRepository manufacturerRepository, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-				return (args) -> {
-					Manufacturer rukka = manufacturerRepository.save(new Manufacturer("Rukka"));
-					Manufacturer reima = manufacturerRepository.save(new Manufacturer("Reima"));
-					Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
+			ManufacturerRepository manufacturerRepository, UserRepository userRepository,
+			PasswordEncoder passwordEncoder) {
+		return (args) -> {
 
-					clothingItemRepository.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", ClothingSize.M));
-					clothingItemRepository.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
-					clothingItemRepository.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
+			if (manufacturerRepository.count() == 0 &&
+					clothingItemRepository.count() == 0 &&
+					toyRepository.count() == 0 &&
+					foodRepository.count() == 0 &&
+					userRepository.count() == 0) {
 
-					toyRepository.save(new Toy("Rope Toy", 4.99, Type.TOY, rekku, "Cotton"));
-					toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
+				System.out.println("Creating default data...");
 
-					foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, Type.FOOD, rekku, "Chicken"));
-					foodRepository.save(new Food("Premium Salmon Delight", 14.99, Type.FOOD, rekku, "Salmon"));
-					
+				Manufacturer rukka = manufacturerRepository.save(new Manufacturer("Rukka"));
+				Manufacturer reima = manufacturerRepository.save(new Manufacturer("Reima"));
+				Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
 
-					if (userRepository.findByUsername("admin").isEmpty()) {
-						userRepository.save(new User(
-								"admin",
-								passwordEncoder.encode("admin"),
-								Role.ADMIN));
-								System.out.println("Admin user created with username: admin and password: admin");		 
-					}
+				clothingItemRepository
+							.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", ClothingSize.M));
+				clothingItemRepository
+							.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
+				clothingItemRepository
+							.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
 
-				};
-		
+				toyRepository.save(new Toy("Rope Toy", 4.99, Type.TOY, rekku, "Cotton"));
+				toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
+
+				foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, Type.FOOD, rekku, "Chicken"));
+				foodRepository.save(new Food("Premium Salmon Delight", 14.99, Type.FOOD, rekku, "Salmon"));
+
+				if (userRepository.findByUsername("admin").isEmpty()) {
+					userRepository.save(new User(
+							"admin",
+							passwordEncoder.encode("admin"),
+							Role.ADMIN));
+					System.out.println("Admin user created with username: admin and password: admin");
+				} else {
+					return;
+
+				}
+
+			}
+			
+
+		};
 	}
-
 }
