@@ -5,28 +5,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin pääsivu</title>
-    <link rel="stylesheet" th:href="@{/css/index.css}">
+    <!-- <link rel="stylesheet" th:href="@{/css/index.css}"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
 </head>
 
-<body>
-    <div class="container">
-        <h1>Admin page</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th><a href="/productlist"><button>View all available products</button></a>
-                    </th>
-                    <th><a href="/manufacturerlist"><button>View all manufacturers</button></a>
-                    </th>
-                </tr>
-            </thead>
-        </table>
-        <form th:action="@{/logout}" method="post">
-            <button type="submit" class="logout">Logout</button>
-        </form>
-
-
-    </div>
+<body class="bg-light">
+    <!-- <div class="container"> -->
+    <section class="vh-100" style="background-color: #9A616D;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col col-xl-10">
+                    <div class="card" style="border-radius: 1rem;">
+                        <div class="row g-0">
+                            <div class="col-md-6 col-lg-7 d-flex align-items-center">
+                                <div class="card-body p-4 p-lg-5 text-black">
+                                    <h1>Admin page</h1>
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <div class="pt-1 mb-4">
+                                                    <!-- <th><a href="/productlist"><button data-mdb-button-init
+                                                                data-mdb-ripple-init
+                                                                class="btn btn-dark btn-lg btn-block">View all available
+                                                                products</button></a>
+                                                    </th> -->
+                                                    <table>
+                                                        <form th:action="@{/productlist}">
+                                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                                class="btn btn-outline-dark btn-lg btn-block">View all available
+                                                                products</button>
+                                                        </form>
+                                                        
+                                                        <form th:action="@{/manufacturerlist}">
+                                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                                class="btn btn-outline-dark btn-lg btn-block">View all
+                                                                manufacturers</button>
+                                                        </form>
+                                                        <form th:action="@{/logout}" method="post">
+                                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                                class="btn btn-danger btn-lg btn-block"
+                                                                type="submit">Logout</button>
+                                                        </form>
+                                                    </table>
+                                                </div>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>
