@@ -2,8 +2,8 @@ package sprint1.sprint1.domain;
 
 public enum Role {
 
-    
-    ADMIN("Admin");
+    ADMIN("Admin"),
+    USER("User");
 
     private final String displayValue;
 

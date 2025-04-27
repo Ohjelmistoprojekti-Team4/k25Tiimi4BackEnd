@@ -28,7 +28,8 @@ public class Sprint1Application {
 	}
 
 	@Bean
-	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository, FoodRepository foodRepository,
+	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository,
+			FoodRepository foodRepository,
 			ManufacturerRepository manufacturerRepository, UserRepository userRepository,
 			PasswordEncoder passwordEncoder) {
 		return (args) -> {
@@ -46,11 +47,11 @@ public class Sprint1Application {
 				Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
 
 				clothingItemRepository
-							.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", ClothingSize.M));
+						.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", ClothingSize.M));
 				clothingItemRepository
-							.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
+						.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
 				clothingItemRepository
-							.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
+						.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
 
 				toyRepository.save(new Toy("Rope Toy", 4.99, Type.TOY, rekku, "Cotton"));
 				toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
@@ -69,8 +70,15 @@ public class Sprint1Application {
 
 				}
 
+				if (userRepository.findByUsername("user").isEmpty()) {
+					userRepository.save(new User(
+							"user",
+							passwordEncoder.encode("user"),
+							Role.USER));
+					System.out.println("User created with username: user and password: user");
+				}
+
 			}
-			
 
 		};
 	}
