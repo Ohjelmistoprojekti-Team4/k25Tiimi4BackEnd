@@ -22,14 +22,20 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-
+    private String email;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
 
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public User(String username, String password, Role role) {
+    public User(String email, String firstName, String lastName, String username, String password,
+            Role role) {
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.role = role;
