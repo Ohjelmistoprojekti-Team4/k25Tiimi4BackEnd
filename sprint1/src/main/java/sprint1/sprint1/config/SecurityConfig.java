@@ -37,7 +37,7 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/api/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/**").permitAll()
                         .anyRequest().hasRole("ADMIN"))
                 .formLogin(login -> login
                         .loginPage("/login")
