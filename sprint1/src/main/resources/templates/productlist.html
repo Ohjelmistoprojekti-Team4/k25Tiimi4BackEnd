@@ -10,180 +10,193 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
-<body>
-    <h1 class="my-4 text-center">Products</h1>
-    <div class="container d-flex justify-content-center mt-4" style="width: 1200px;">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                    <th>Type</th>
-                    <th>Manufacturer</th>
-                    <th>Color</th>
-                    <th>Size</th>
-                    <th>Material</th>
-                    <th>Flavor</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="clothing : ${clothings}">
-                    <td th:text="${clothing.name}"></td>
-                    <td th:text="${clothing.price}"></td>
-                    <td th:text="${clothing.type.displayValue}"></td>
-                    <td
-                        th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufacturer'}">
-                    </td>
-                    <td th:text="${clothing.color}"></td>
-                    <td th:text="${clothing.size}"></td>
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <a th:href="@{clothings/edit/{id}(id=${clothing.productId})}">
-                            <button class="btn btn-primary">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <form th:action="@{/clothings/delete/{id}(id=${clothing.productId})}" method="post">
-                            <button type="button" class="btn btn-danger"
-                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalClothing' + ${clothing.productId}">
-                                Delete
-                            </button>
-                        </form>
-                        <div class="modal fade" th:id="'deleteModalClothing' + ${clothing.productId}" tabindex="-1"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirm deletion</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete the clothing item <b
-                                            th:text="${clothing.name}"></b>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                        <form th:id="'deleteFormClothing' + ${clothing.productId}"
-                                            th:action="@{/clothings/delete/{id}(id=${clothing.productId})}"
+<body class="bg-light">
+    <section class="vh-100" style="background-color: #9A616D;">
+        <div class="container py-5 h-100">
+            <div class="card" style="border-radius: 1rem;">
+                <div class="card-body p-4 p-lg-5 text-black">
+                    <h1 class="text-center mb-4" style="color: #343a40;">Products</h1>
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Type</th>
+                                    <th>Manufacturer</th>
+                                    <th>Color</th>
+                                    <th>Size</th>
+                                    <th>Material</th>
+                                    <th>Flavor</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="clothing : ${clothings}">
+                                    <td th:text="${clothing.name}"></td>
+                                    <td th:text="${clothing.price}"></td>
+                                    <td th:text="${clothing.type.displayValue}"></td>
+                                    <td
+                                        th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufacturer'}">
+                                    </td>
+                                    <td th:text="${clothing.color}"></td>
+                                    <td th:text="${clothing.size}"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <a th:href="@{clothings/edit/{id}(id=${clothing.productId})}">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <form th:action="@{/clothings/delete/{id}(id=${clothing.productId})}"
                                             method="post">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalClothing' + ${clothing.productId}">
+                                                Delete
+                                            </button>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                                        <div class="modal fade" th:id="'deleteModalClothing' + ${clothing.productId}"
+                                            tabindex="-1" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Confirm deletion</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete the clothing item <b
+                                                            th:text="${clothing.name}"></b>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form th:id="'deleteFormClothing' + ${clothing.productId}"
+                                                            th:action="@{/clothings/delete/{id}(id=${clothing.productId})}"
+                                                            method="post">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                <tr th:each="toy : ${toys}">
-                    <td th:text="${toy.name}"></td>
-                    <td th:text="${toy.price}"></td>
-                    <td th:text="${toy.type.displayValue}"></td>
-                    <td th:text="${toy.manufacturer != null ? toy.manufacturer.name : 'Unknown Manufacturer'}"></td>
-                    <td></td>
-                    <td></td>
-                    <td th:text="${toy.material}"></td>
-                    <td></td>
-                    <td>
-                        <a th:href="@{toys/edit/{id}(id=${toy.productId})}">
-                            <button class="btn btn-primary">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <form th:action="@{/toys/delete/{id}(id=${toy.productId})}" method="post">
-                            <button type="button" class="btn btn-danger"
-                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalToy' + ${toy.productId}">
-                                Delete
-                            </button>
-                        </form>
-                        <div class="modal fade" th:id="'deleteModalToy' + ${toy.productId}" tabindex="-1"
-                            aria-labelledby="deleteModalLabelToy" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirm deletion</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Sulje"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete the toy <b th:text="${toy.name}"></b>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                <tr th:each="toy : ${toys}">
+                                    <td th:text="${toy.name}"></td>
+                                    <td th:text="${toy.price}"></td>
+                                    <td th:text="${toy.type.displayValue}"></td>
+                                    <td
+                                        th:text="${toy.manufacturer != null ? toy.manufacturer.name : 'Unknown Manufacturer'}">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td th:text="${toy.material}"></td>
+                                    <td></td>
+                                    <td>
+                                        <a th:href="@{toys/edit/{id}(id=${toy.productId})}">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+                                    <td>
                                         <form th:action="@{/toys/delete/{id}(id=${toy.productId})}" method="post">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalToy' + ${toy.productId}">
+                                                Delete
+                                            </button>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
+                                        <div class="modal fade" th:id="'deleteModalToy' + ${toy.productId}"
+                                            tabindex="-1" aria-labelledby="deleteModalLabelToy" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Confirm deletion</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Sulje"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete the toy <b
+                                                            th:text="${toy.name}"></b>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form th:action="@{/toys/delete/{id}(id=${toy.productId})}"
+                                                            method="post">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
 
-                <tr th:each="food : ${foods}">
-                    <td th:text="${food.name}"></td>
-                    <td th:text="${food.price}"></td>
-                    <td th:text="${food.type.displayValue}"></td>
-                    <td th:text="${food.manufacturer != null ? food.manufacturer.name : 'Unknown Manufacturer'}"></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td th:text="${food.flavor}"></td>
-                    <td>
-                        <a th:href="@{foods/edit/{id}(id=${food.productId})}">
-                            <button class="btn btn-primary">Edit</button>
-                        </a>
-                    </td>
-                    <td>
-                        <form th:action="@{/foods/delete/{id}(id=${food.productId})}" method="post">
-                            <button type="button" class="btn btn-danger"
-                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalFood' + ${food.productId}">
-                                Delete
-                            </button>
-                        </form>
-                        <div class="modal fade" th:id="'deleteModalFood' + ${food.productId}" tabindex="-1"
-                            aria-labelledby="deleteModalLabelFood" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title">Confirm deletion</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Sulje"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure you want to delete the food item <b th:text="${food.name}"></b>?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
+                                <tr th:each="food : ${foods}">
+                                    <td th:text="${food.name}"></td>
+                                    <td th:text="${food.price}"></td>
+                                    <td th:text="${food.type.displayValue}"></td>
+                                    <td
+                                        th:text="${food.manufacturer != null ? food.manufacturer.name : 'Unknown Manufacturer'}">
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td th:text="${food.flavor}"></td>
+                                    <td>
+                                        <a th:href="@{foods/edit/{id}(id=${food.productId})}">
+                                            <button class="btn btn-primary">Edit</button>
+                                        </a>
+                                    </td>
+                                    <td>
                                         <form th:action="@{/foods/delete/{id}(id=${food.productId})}" method="post">
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="button" class="btn btn-danger"
+                                                th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalFood' + ${food.productId}">
+                                                Delete
+                                            </button>
                                         </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="text-center my-4">
-        <!-- <a href="/addclothing"><button class="btn btn-success">Add Clothing</button></a>
-        <a href="/addtoy"><button class="btn btn-success">Add Toy</button></a> Tämän voi poistaa, kun kaikille tuotteille sopiva lisäyslomake on testattu-->
-        <a th:href="@{/add}"><button class="btn btn-success">Add Product</button></a>
-        <a href="/manufacturerlist"><button class="btn btn-primary">View manufacturers</button></a>
-        <br>
-        <br>
-        <a href="/"><button class="btn btn-secondary">Back to main page</button></a>
-
-    </div>
-
+                                        <div class="modal fade" th:id="'deleteModalFood' + ${food.productId}"
+                                            tabindex="-1" aria-labelledby="deleteModalLabelFood" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Confirm deletion</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Sulje"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Are you sure you want to delete the food item <b
+                                                            th:text="${food.name}"></b>?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cancel</button>
+                                                        <form th:action="@{/foods/delete/{id}(id=${food.productId})}"
+                                                            method="post">
+                                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center my-4">
+                        <a th:href="@{/add}"><button class="btn btn-success">Add Product</button></a>
+                        <a href="/manufacturerlist"><button class="btn btn-primary">View manufacturers</button></a>
+                        <br><br>
+                        <a href="/"><button class="btn btn-secondary">Back to main page</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 
 </html>
