@@ -16,7 +16,6 @@
 </head>
 
 <body class="bg-light">
-    <!-- <div class="container"> -->
     <section class="vh-100" style="background-color: #9A616D;">
         <div class="container py-3 h-100">
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -26,38 +25,32 @@
                             <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                 <div class="card-body p-4 p-lg-5 text-black">
                                     <h1>Admin page</h1>
-                                    <table>
-                                        <thead>
-                                            <tr>
-                                                <div class="pt-1 mb-4">
-                                                    <!-- <th><a href="/productlist"><button data-mdb-button-init
-                                                                data-mdb-ripple-init
-                                                                class="btn btn-dark btn-lg btn-block">View all available
-                                                                products</button></a>
-                                                    </th> -->
-                                                    <table>
-                                                        <form th:action="@{/productlist}">
-                                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                                class="btn btn-outline-dark btn-lg btn-block">View all available
-                                                                products</button>
-                                                        </form>
-                                                        
-                                                        <form th:action="@{/manufacturerlist}">
-                                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                                class="btn btn-outline-dark btn-lg btn-block">View all
-                                                                manufacturers</button>
-                                                        </form>
-                                                        <form th:action="@{/logout}" method="post">
-                                                            <button data-mdb-button-init data-mdb-ripple-init
-                                                                class="btn btn-danger btn-lg btn-block"
-                                                                type="submit">Logout</button>
-                                                        </form>
-                                                    </table>
-                                                </div>
-                                            </tr>
-                                        </thead>
-                                    </table>
+                                    <div class="pt-1 mb-4">
+                                        <form th:action="@{/productlist}">
+                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-outline-dark btn-lg btn-block mb-3">
+                                                View all available products
+                                            </button>
+                                        </form>
+
+                                        <form th:action="@{/manufacturerlist}">
+                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-outline-dark btn-lg btn-block mb-3">
+                                                View all manufacturers
+                                            </button>
+                                        </form>
+                                        <form th:action="@{/logout}" method="post">
+                                            <button data-mdb-button-init data-mdb-ripple-init
+                                                class="btn btn-danger btn-lg btn-block" type="submit">
+                                                Logout
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6 col-lg-5 d-flex justify-content-center align-items-center">
+                                <img class="img-fluid h-auto" th:src="@{images/paw.png}" alt="logo"
+                                    style="object-fit: cover; border-radius: 1rem 0 0 1rem; max-width: 100%; height: auto;" />
                             </div>
                         </div>
                     </div>
@@ -65,6 +58,7 @@
             </div>
         </div>
     </section>
+
 </body>
 
 </html>
