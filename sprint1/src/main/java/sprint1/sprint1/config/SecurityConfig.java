@@ -36,7 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
                         .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/css/**", "images/loginpage.jpg").permitAll()
                         .anyRequest().hasRole("ADMIN"))
