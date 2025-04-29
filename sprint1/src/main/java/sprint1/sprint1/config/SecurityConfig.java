@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
+//import org.springframework.security.config.Customizer;
 
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -38,7 +38,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
                         .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("/css/**", "images/loginpage.jpg").permitAll()
+                        .requestMatchers("/css/**", "images/**").permitAll()
                         .anyRequest().hasRole("ADMIN"))
                 .formLogin(login -> login
                         .loginPage("/login")
