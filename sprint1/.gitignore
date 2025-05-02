@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Ignore MacOS genererated files
+.DS_Store
+**/DS_Store
+.Trashes
+Thumbs.db
