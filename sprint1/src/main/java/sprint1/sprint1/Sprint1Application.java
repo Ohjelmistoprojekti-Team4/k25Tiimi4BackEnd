@@ -62,8 +62,8 @@ public class Sprint1Application {
 				if (userRepository.findByUsername("admin").isEmpty()) {
 					userRepository.save(new User(
 							"admin@example.com", 
-							"Admin",
-							"User",
+							"Esimerkki",
+							"Käyttäjä",
 							"admin",
 							passwordEncoder.encode("admin"),
 							Role.ADMIN));

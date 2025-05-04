@@ -35,7 +35,7 @@ public class UserRestController {
             return ResponseEntity.status(HttpStatus.CONFLICT)
                     .body(Map.of("message", "Username already exists"));
         }
-        
+
         user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         if (user.getRole() == null) {
@@ -47,6 +47,26 @@ public class UserRestController {
         //onnistunut rekisteröinti
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(Map.of("message", "User registered successfully"));
+    }
+    
+    @GetMapping("/profile")
+    public ResponseEntity<User> getUserProfile(Authentication authentication) {
+        String username = authentication.getName(); 
+        return userRepository.findByUsername(username)
+                .map(user -> ResponseEntity.ok(user))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<Map<String, String>> deleteUserAccount(Authentication authentication) {
+        String username = authentication.getName();
+        return userRepository.findByUsername(username)
+                .map(user -> {
+                    userRepository.delete(user);
+                    return ResponseEntity.ok(Map.of("message", "User account deleted successfully"));
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(Map.of("message", "User not found")));
     }
 
    
