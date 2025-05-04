@@ -20,8 +20,8 @@ public class ClothingItem extends Product {
     
     public ClothingItem() {}
 
-    public ClothingItem(String name, Double price, Type type, Manufacturer manufacturer, String color, ClothingSize size) {
-        super(name, price, type, manufacturer);
+    public ClothingItem(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String color, ClothingSize size) {
+        super(name, price, amount, type, manufacturer);
         this.color = color;
         this.size = size;
     }

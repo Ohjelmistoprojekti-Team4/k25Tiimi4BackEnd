@@ -47,17 +47,17 @@ public class Sprint1Application {
 				Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
 
 				clothingItemRepository
-						.save(new ClothingItem("Jacket", 20.99, Type.CLOTHING, rukka, "Red", ClothingSize.M));
+						.save(new ClothingItem("Jacket", 20.99, 3, Type.CLOTHING, rukka, "Red", ClothingSize.M));
 				clothingItemRepository
-						.save(new ClothingItem("Raincoat", 29.99, Type.CLOTHING, reima, "Black", ClothingSize.S));
+						.save(new ClothingItem("Raincoat", 29.99, 10, Type.CLOTHING, reima, "Black", ClothingSize.S));
 				clothingItemRepository
-						.save(new ClothingItem("Collar", 18.99, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
+						.save(new ClothingItem("Collar", 18.99, 8, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
 
-				toyRepository.save(new Toy("Rope Toy", 4.99, Type.TOY, rekku, "Cotton"));
-				toyRepository.save(new Toy("KONG Puppy", 8.99, Type.TOY, rekku, "Rubber"));
+				toyRepository.save(new Toy("Rope Toy", 4.99, 15, Type.TOY, rekku, "Cotton"));
+				toyRepository.save(new Toy("KONG Puppy", 8.99, 22, Type.TOY, rekku, "Rubber"));
 
-				foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, Type.FOOD, rekku, "Chicken"));
-				foodRepository.save(new Food("Premium Salmon Delight", 14.99, Type.FOOD, rekku, "Salmon"));
+				foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, 20, Type.FOOD, rekku, "Chicken"));
+				foodRepository.save(new Food("Premium Salmon Delight", 14.99, 30, Type.FOOD, rekku, "Salmon"));
 
 				if (userRepository.findByUsername("admin").isEmpty()) {
 					userRepository.save(new User(

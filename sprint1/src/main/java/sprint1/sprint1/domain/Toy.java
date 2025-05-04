@@ -15,8 +15,8 @@ public class Toy extends Product {
 
     public Toy() {}
 
-    public Toy(String name, Double price, Type type, Manufacturer manufacturer, String material) {
-        super(name, price, type, manufacturer);
+    public Toy(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String material) {
+        super(name, price, amount, type, manufacturer);
         this.material = material;
     }
 

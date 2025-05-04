@@ -25,6 +25,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Price</th>
+                                            <th>Stock amount</th>
                                             <th>Type</th>
                                             <th>Manufacturer</th>
                                             <th>Color</th>
@@ -39,6 +40,7 @@
                                         <tr th:each="clothing : ${clothings}">
                                             <td th:text="${clothing.name}"></td>
                                             <td th:text="${clothing.price}"></td>
+                                            <td th:text="${clothing.amount}"></td>
                                             <td th:text="${clothing.type.displayValue}"></td>
                                             <td
                                                 th:text="${clothing.manufacturer != null ? clothing.manufacturer.name : 'Unknown Manufacturer'}">
@@ -94,6 +96,7 @@
                                         <tr th:each="toy : ${toys}">
                                             <td th:text="${toy.name}"></td>
                                             <td th:text="${toy.price}"></td>
+                                            <td th:text="${toy.amount}"></td>
                                             <td th:text="${toy.type.displayValue}"></td>
                                             <td
                                                 th:text="${toy.manufacturer != null ? toy.manufacturer.name : 'Unknown Manufacturer'}">
@@ -148,6 +151,7 @@
                                         <tr th:each="food : ${foods}">
                                             <td th:text="${food.name}"></td>
                                             <td th:text="${food.price}"></td>
+                                            <td th:text="${food.amount}"></td>
                                             <td th:text="${food.type.displayValue}"></td>
                                             <td
                                                 th:text="${food.manufacturer != null ? food.manufacturer.name : 'Unknown Manufacturer'}">

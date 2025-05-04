@@ -15,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -37,6 +38,10 @@ public abstract class Product {
     @Column(name="price")
     private Double price;
 
+    @Min(value = 0, message = "The value must be positive")
+    @Column(name="amount")
+    private Integer amount;
+
     @Column(name="type")
     @Enumerated(EnumType.STRING)
     private Type type;
@@ -48,10 +53,11 @@ public abstract class Product {
 
     public Product() {}
 
-    public Product(String name, Double price, Type type, Manufacturer manufacturer) {
+    public Product(String name, Double price, Integer amount, Type type, Manufacturer manufacturer) {
         super();
         this.name = name;
         this.price = price;
+        this.amount = amount;
         this.type = type;
         this.manufacturer = manufacturer;
     }
@@ -70,6 +76,14 @@ public abstract class Product {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
     }
 
     public Double getPrice() {

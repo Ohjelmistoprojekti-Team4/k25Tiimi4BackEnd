@@ -15,8 +15,8 @@ public class Food extends Product {
 
     public Food() {}
 
-    public Food(String name, Double price, Type type, Manufacturer manufacturer, String flavor) {
-        super(name, price, type, manufacturer);
+    public Food(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String flavor) {
+        super(name, price, amount, type, manufacturer);
         this.flavor = flavor;
     }
 
