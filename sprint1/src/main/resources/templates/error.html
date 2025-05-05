@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Page not found</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #cc0000;
+        }
+
+        img {
+            width: 200px;
+            margin-top: 20px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        a {
+            margin-top: 30px;
+            display: inline-block;
+            text-decoration: none;
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Oops! Page doesn't exist or it's still under construction.</h1>
+    <img src="/images/que.png">
+    <br>
+    <a th:href="@{/}">Go to main page</a>
+</body>
+
+</html>

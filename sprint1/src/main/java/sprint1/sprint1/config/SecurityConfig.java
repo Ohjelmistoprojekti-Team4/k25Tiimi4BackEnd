@@ -40,12 +40,11 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
-                        .requestMatchers("/api/users/delete").permitAll() 
+                        .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()                        .requestMatchers("/api/users/delete").permitAll() 
                         .requestMatchers("/api/**").permitAll()
-                        .requestMatchers("/css/**", "images/**").permitAll()
+                        .requestMatchers("/css/**", "/images/**").permitAll()
                         .anyRequest().hasRole("ADMIN"))
-                .userDetailsService(userDetailsService)
+                //.userDetailsService(userDetailsService)
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/perform-login") // react login for users
