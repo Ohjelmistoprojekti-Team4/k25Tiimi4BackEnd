@@ -1,7 +1,10 @@
 package sprint1.sprint1.domain;
 
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,6 +16,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
@@ -50,6 +54,10 @@ public abstract class Product {
     @JsonIgnoreProperties ("products")
     @JoinColumn(name = "manufacturerId")
     private Manufacturer manufacturer;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
+    @JsonIgnoreProperties ("product")
+    private List<OrderProduct> orderProducts;
 
     public Product() {}
 
@@ -109,11 +117,21 @@ public abstract class Product {
     public void setManufacturer(Manufacturer manufacturer) {
         this.manufacturer = manufacturer;
     }
+    
+    public List<OrderProduct> getOrderProducts() {
+        return orderProducts;
+    }
+
+    public void setOrderProducts(List<OrderProduct> orderProducts) {
+        this.orderProducts = orderProducts;
+    }
 
     @Override
     public String toString() {
         return "Product [productId=" + productId + ", name=" + name + ", price=" + price + ", type=" + type
                 + ", manufacturer=" + manufacturer + "]";
     }
+
+    
 
 }

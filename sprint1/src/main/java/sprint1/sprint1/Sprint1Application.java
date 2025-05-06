@@ -1,5 +1,7 @@
 package sprint1.sprint1;
 
+import java.time.LocalDateTime;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -13,6 +15,10 @@ import sprint1.sprint1.domain.Food;
 import sprint1.sprint1.domain.FoodRepository;
 import sprint1.sprint1.domain.Manufacturer;
 import sprint1.sprint1.domain.ManufacturerRepository;
+import sprint1.sprint1.domain.Order;
+import sprint1.sprint1.domain.OrderProduct;
+import sprint1.sprint1.domain.OrderProductRepository;
+import sprint1.sprint1.domain.OrderRepository;
 import sprint1.sprint1.domain.Role;
 import sprint1.sprint1.domain.Toy;
 import sprint1.sprint1.domain.ToyRepository;
@@ -31,14 +37,17 @@ public class Sprint1Application {
 	public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository,
 			FoodRepository foodRepository,
 			ManufacturerRepository manufacturerRepository, UserRepository userRepository,
-			PasswordEncoder passwordEncoder) {
+			PasswordEncoder passwordEncoder, OrderRepository orderRepository,
+			OrderProductRepository orderProductRepository) {
 		return (args) -> {
 
 			if (manufacturerRepository.count() == 0 &&
 					clothingItemRepository.count() == 0 &&
 					toyRepository.count() == 0 &&
 					foodRepository.count() == 0 &&
-					userRepository.count() == 0) {
+					userRepository.count() == 0 &&
+					orderRepository.count() == 0 &&
+					orderProductRepository.count() == 0) {
 
 				System.out.println("Creating default data...");
 
@@ -46,22 +55,32 @@ public class Sprint1Application {
 				Manufacturer reima = manufacturerRepository.save(new Manufacturer("Reima"));
 				Manufacturer rekku = manufacturerRepository.save(new Manufacturer("Rekku"));
 
-				clothingItemRepository
+				ClothingItem clothingItem1 = clothingItemRepository
 						.save(new ClothingItem("Jacket", 20.99, 3, Type.CLOTHING, rukka, "Red", ClothingSize.M));
 				clothingItemRepository
 						.save(new ClothingItem("Raincoat", 29.99, 10, Type.CLOTHING, reima, "Black", ClothingSize.S));
 				clothingItemRepository
 						.save(new ClothingItem("Collar", 18.99, 8, Type.CLOTHING, rukka, "Pink", ClothingSize.L));
 
-				toyRepository.save(new Toy("Rope Toy", 4.99, 15, Type.TOY, rekku, "Cotton"));
+				Toy toy1 = toyRepository.save(new Toy("Rope Toy", 4.99, 15, Type.TOY, rekku, "Cotton"));
 				toyRepository.save(new Toy("KONG Puppy", 8.99, 22, Type.TOY, rekku, "Rubber"));
 
-				foodRepository.save(new Food("Crunchy Chicken Bites", 10.99, 20, Type.FOOD, rekku, "Chicken"));
-				foodRepository.save(new Food("Premium Salmon Delight", 14.99, 30, Type.FOOD, rekku, "Salmon"));
+				Food food1 = foodRepository
+						.save(new Food("Crunchy Chicken Bites", 10.99, 20, Type.FOOD, rekku, "Chicken"));
+				Food food2 = foodRepository
+						.save(new Food("Premium Salmon Delight", 14.99, 30, Type.FOOD, rekku, "Salmon"));
+
+				User testUser = userRepository.save(new User(
+						"testi@example.com",
+						"Teppo",
+						"Testaaja",
+						"testikäyttäjä",
+						"salasana123",
+						Role.USER));
 
 				if (userRepository.findByUsername("admin").isEmpty()) {
 					userRepository.save(new User(
-							"admin@example.com", 
+							"admin@example.com",
 							"Esimerkki",
 							"Käyttäjä",
 							"admin",
@@ -80,6 +99,14 @@ public class Sprint1Application {
 							Role.USER));
 					System.out.println("User created with username: user and password: user");
 				}
+
+				Order order1 = orderRepository.save(new Order(testUser, LocalDateTime.now()));
+				Order order2 = orderRepository.save(new Order(testUser, LocalDateTime.now()));
+
+				orderProductRepository.save(new OrderProduct(order1, toy1, 2));
+				orderProductRepository.save(new OrderProduct(order1, clothingItem1, 1));
+				orderProductRepository.save(new OrderProduct(order2, food1, 2));
+				orderProductRepository.save(new OrderProduct(order2, food2, 1));
 
 			}
 
