@@ -1,5 +1,7 @@
 package sprint1.sprint1.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,10 +26,12 @@ public class OrderProduct {
 
     @ManyToOne
     @JoinColumn(name = "orderId")
+    @JsonIgnoreProperties("orderProducts")
     private Order order;
 
     @ManyToOne
     @JoinColumn(name = "productId")
+    @JsonIgnoreProperties("orderProducts")
     private Product product;
 
     @Min(value = 1, message = "Quantity must be at least 1")

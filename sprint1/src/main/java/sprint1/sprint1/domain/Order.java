@@ -3,6 +3,8 @@ package sprint1.sprint1.domain;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,9 +29,11 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "userId")
+    @JsonIgnoreProperties("orders")
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
+    @JsonIgnoreProperties ("order")
     private List<OrderProduct> orderProducts;
 
     private LocalDateTime orderDate;
