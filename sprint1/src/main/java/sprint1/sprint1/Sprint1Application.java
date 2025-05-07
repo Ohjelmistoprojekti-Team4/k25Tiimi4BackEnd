@@ -75,7 +75,7 @@ public class Sprint1Application {
 						"Teppo",
 						"Testaaja",
 						"testikäyttäjä",
-						"salasana123",
+						passwordEncoder.encode("password123"),
 						Role.USER));
 
 				if (userRepository.findByUsername("admin").isEmpty()) {
