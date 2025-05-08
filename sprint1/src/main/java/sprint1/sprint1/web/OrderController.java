@@ -1,5 +1,6 @@
 package sprint1.sprint1.web;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,7 @@ public class OrderController {
     @GetMapping("/orderlist")
     public String showOrders(Model model) {
         List<Order> orders = orderRepository.findAllWithOrderProducts();
+        orders.sort(Comparator.comparing(Order::getOrderDate));
         model.addAttribute("orders", orders);
         System.out.println("Ladattiin tilauksia: " + orders.size());
         return "orderlist"; 
