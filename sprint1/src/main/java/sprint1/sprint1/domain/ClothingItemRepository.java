@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface ClothingItemRepository extends CrudRepository<ClothingItem, Long> {
     List<ClothingItem> findByManufacturer(Manufacturer manufacturer);
+    boolean existsByManufacturer_ManufacturerId(Long manufacturerId);
 }

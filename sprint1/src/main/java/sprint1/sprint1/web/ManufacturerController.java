@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 import sprint1.sprint1.domain.ClothingItem;
@@ -56,11 +57,13 @@ public class ManufacturerController {
         }
     }
 
-    @PostMapping("/deletemanufacturer/{id}")
-    public String deleteManufacturer(@PathVariable("id") Long manufacturerId) {
-        mrepository.deleteById(manufacturerId);
-        return "redirect:/manufacturerlist";
-    }
+    /*
+     * @PostMapping("/deletemanufacturer/{id}")
+     * public String deleteManufacturer(@PathVariable("id") Long manufacturerId) {
+     * mrepository.deleteById(manufacturerId);
+     * return "redirect:/manufacturerlist";
+     * }
+     */
 
     @GetMapping("/manufacturer/{id}")
     public String viewManufacturerProducts(@PathVariable("id") Long id, Model model) {
@@ -73,6 +76,22 @@ public class ManufacturerController {
         model.addAttribute("clothingItems", clothingItems);
         model.addAttribute("food", food);
         return "products-by-manufacturer";
+    }
+
+    @PostMapping("/deletemanufacturer/{id}")
+    public String deleteManufacturer(@PathVariable("id") Long manufacturerId, RedirectAttributes redirectAttributes) {
+        boolean hasProducts = toyRepository.existsByManufacturer_ManufacturerId(manufacturerId) ||
+                clothingItemRepository.existsByManufacturer_ManufacturerId(manufacturerId) ||
+                foodRepository.existsByManufacturer_ManufacturerId(manufacturerId);
+
+        if (hasProducts) {
+            redirectAttributes.addFlashAttribute("errorMessage",
+                    "Can't delete manufacturer that has products in database");
+            return "redirect:/manufacturerlist";
+        }
+
+        mrepository.deleteById(manufacturerId);
+        return "redirect:/manufacturerlist";
     }
 
 }

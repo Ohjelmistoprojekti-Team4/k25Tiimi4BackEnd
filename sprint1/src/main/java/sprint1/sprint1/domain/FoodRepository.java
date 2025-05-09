@@ -6,4 +6,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface FoodRepository extends CrudRepository<Food, Long> {
     List<Food> findByManufacturer(Manufacturer manufacturer);
+    boolean existsByManufacturer_ManufacturerId(Long manufacturerId);
 }

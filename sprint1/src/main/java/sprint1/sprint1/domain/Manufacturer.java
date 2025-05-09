@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
 public class Manufacturer {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long manufacturerId;
 
     @NotBlank(message = "Name is required")
@@ -25,10 +25,11 @@ public class Manufacturer {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "manufacturer")
-    @JsonIgnoreProperties ("manufacturer")
+    @JsonIgnoreProperties("manufacturer")
     private List<Product> products;
 
-    public Manufacturer() {}
+    public Manufacturer() {
+    }
 
     public Manufacturer(String name) {
         super();
@@ -55,9 +56,13 @@ public class Manufacturer {
         return products;
     }
 
-    //public void setClothes(List<Product> products) {
-        public void setProducts(List<Product> products) {
+    // public void setClothes(List<Product> products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public boolean hasProducts() {
+        return products != null && !products.isEmpty();
     }
 
     @Override
