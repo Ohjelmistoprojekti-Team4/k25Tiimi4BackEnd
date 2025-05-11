@@ -13,43 +13,43 @@
 <body class="bg-light">
     <section class="vh-100" style="background-color: #9A616D;">
         <div class="container py-5 h-100">
-            <div class="card" style="border-radius: 1rem;">
-                <div class="card-body p-4 p-lg-5 text-black">
+            <div class="card align-items-center" style="border-radius: 1rem;">
+                <div class="card-body p-4 p-lg-5 text-black" style="max-width: 400px">
                     <h1 class="text-center mb-4" style="color: #343a40;">Add Manufacturer</h1>
-                    <div class="table-responsive" style="max-width: 50%; margin: 0 auto;">
-                        <form id="addFormManufacturer" method="post" th:action="@{/savemanufacturer}"
-                            th:object="${manufacturer}">
-                            <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
-                            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></p>
 
-                            <p>
-                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
-                                    data-bs-target="#confirmModal">Add</button>
-                                <a th:href="@{/manufacturerlist}" class="btn btn-secondary">Cancel</a>
-                            </p>
-                        </form>
-                        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="confirmModalLabel">Confirm</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Sulje"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Add manufacturer?
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Cancel</button>
-                                        <button type="button" class="btn btn-primary"
-                                            onclick="submitForm()">Yes</button>
-                                    </div>
+
+                    <form id="addFormManufacturer" method="post" th:action="@{/savemanufacturer}"
+                        th:object="${manufacturer}">
+                        <p>Name:<input type="text" th:field="*{name}" placeholder="Name" style="width: 100%" /></p>
+                        <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="error"></p>
+
+                        <div class="d-flex justify-content-center gap-2 pt-3">
+                            <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                data-bs-target="#confirmModal">Add</button>
+                            <a th:href="@{/manufacturerlist}" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+                        aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="confirmModalLabel">Confirm</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Sulje"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Add manufacturer?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary" onclick="submitForm()">Yes</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                     <script>
                         function submitForm() {
                             document.getElementById("addFormManufacturer").submit();

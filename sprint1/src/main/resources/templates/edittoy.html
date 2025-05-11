@@ -13,35 +13,36 @@
 <body class="bg-light">
     <section class="vh-100" style="background-color: #9A616D;">
         <div class="container py-5 h-100">
-            <div class="card" style="border-radius: 1rem;">
-                <div class="card-body p-4 p-lg-5 text-black">
-                    <h1>Edit Toy</h1>
+            <div class="card align-items-center" style="border-radius: 1rem;">
+                <div class="card-body p-4 p-lg-5 text-black" style="max-width: 400px">
+                    <h1 class="text-center pb-3">Edit Toy</h1>
                     <form id="editToyForm" method="post" th:action="@{/toys/edit/save}" th:object="${toy}">
                         <input type="hidden" th:field="*{productId}" />
-                        <p>Name:<input type="text" th:field="*{name}" placeholder="Name" /></p>
+                        <p>Name:<input type="text" th:field="*{name}" placeholder="Name" style="width: 100%"  /></p>
                         <p th:if="${#fields.hasErrors('name')}" class="error" th:errors="*{name}"></p>
 
-                        <p>Price:<input type="number" step="0.01" th:field="*{price}" placeholder="Price" /></p>
+                        <p>Price:<input type="number" step="0.01" th:field="*{price}" placeholder="Price" style="width: 100%"  /></p>
                         <p th:if="${#fields.hasErrors('price')}" class="error" th:errors="*{price}"></p>
 
-                        <p>Amount:<input type="number" step="1" th:field="*{amount}" placeholder="Stock amount" /></p>
+                        <p>Amount:<input type="number" step="1" th:field="*{amount}" placeholder="Stock amount" style="width: 100%"  /></p>
                         <p th:if="${#fields.hasErrors('amount')}" class="error" th:errors="*{amount}"></p>
 
                         <p>Manufacturer:
-                            <select th:field="*{manufacturer}">
+                            <select th:field="*{manufacturer}" style="width: 100%" >
                                 <option th:each="manufacturer : ${manufacturers}"
                                     th:value="${manufacturer.manufacturerId}" th:text="${manufacturer.name}"></option>
                             </select>
                         </p>
 
-                        <p>Material:<input type="text" th:field="*{material}" placeholder="Material" /></p>
+                        <p>Material:<input type="text" th:field="*{material}" placeholder="Material"  style="width: 100%" /></p>
                         <p th:if="${#fields.hasErrors('material')}" class="error" th:errors="*{material}"></p>
 
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                            data-bs-target="#confirmModal">
-                            Save
-                        </button>
-                        <a th:href="@{/productlist}" class="btn btn-secondary">Cancel</a>
+                        <div class="d-flex justify-content-center gap-2 pt-3">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                Save
+                            </button>
+                            <a th:href="@{/productlist}" class="btn btn-secondary">Cancel</a>
+                        </div>
                     </form>
                     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
                         aria-hidden="true">

@@ -11,9 +11,10 @@
         <div class="container py-5 h-100">
             <div class="card" style="border-radius: 1rem;">
                 <div class="card-body p-4 p-lg-5 text-black">
-                    <h1 class="text-center mb-4" style="color: #343a40;">Add product</h1>
-                    <div class="table-responsive" style="max-width: 50%; margin: 0 auto;">
-                        <h2>Choose the type of the product</h2>
+                    <h1 class="text-center mb-3" style="color: #343a40;">Add product</h1>
+                    
+                    <div class="text-center" style="max-width: 50%; margin: 0 auto;">
+                        <h2 class="py-2">Choose the type of the product</h2>
 
                         <select onchange="location = '/add/' + this.value">
                             <option disabled selected>Choose type</option>
@@ -21,8 +22,7 @@
                             </option>
                         </select>
                         <br>
-                        <br>
-                        <a href="/productlist"><button class="btn btn-secondary">Back</button></a>
+                        <a href="/productlist"><button class="btn btn-secondary mt-4">Back</button></a>
                     </div>
                 </div>
             </div>
