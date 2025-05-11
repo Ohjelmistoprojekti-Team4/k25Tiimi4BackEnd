@@ -70,19 +70,12 @@ public class Sprint1Application {
 				Food food2 = foodRepository
 						.save(new Food("Premium Salmon Delight", 14.99, 30, Type.FOOD, rekku, "Salmon"));
 
-				User testUser = userRepository.save(new User(
-						"testi@example.com",
-						"Teppo",
-						"Testaaja",
-						"testikäyttäjä",
-						passwordEncoder.encode("password123"),
-						Role.USER));
 
 				if (userRepository.findByUsername("admin").isEmpty()) {
 					userRepository.save(new User(
 							"admin@example.com",
 							"Esimerkki",
-							"Käyttäjä",
+							"Admin",
 							"admin",
 							passwordEncoder.encode("admin"),
 							Role.ADMIN));
@@ -99,6 +92,14 @@ public class Sprint1Application {
 							Role.USER));
 					System.out.println("User created with username: user and password: user");
 				}
+
+				User testUser = userRepository.save(new User(
+						"testi@example.com",
+						"Teppo",
+						"Testaaja",
+						"testikäyttäjä",
+						passwordEncoder.encode("password123"),
+						Role.USER));
 
 				Order order1 = orderRepository.save(new Order(testUser, LocalDateTime.now()));
 				Order order2 = orderRepository.save(new Order(testUser, LocalDateTime.now()));

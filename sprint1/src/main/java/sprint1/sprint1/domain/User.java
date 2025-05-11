@@ -13,6 +13,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -28,12 +31,24 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
 
+    @NotBlank(message = "Email is required")
+    @Email(message = "Must be a valid email address")
+    private String email;
+
+    @NotBlank(message = "Firstname is required")
+    @Size(min = 2, max = 30, message = "Must be between 2-30 characters")
+    private String firstName;
+
+    @NotBlank(message = "Lastname is required")
+    @Size(min = 2, max = 30, message = "Must be between 2-30 characters")
+    private String lastName;
+
+    @NotBlank(message = "Username is required")
+    @Size(min = 2, max = 30, message = "Must be between 2-30 characters")
+    private String username;
+
+    private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
 
