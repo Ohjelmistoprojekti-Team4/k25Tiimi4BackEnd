@@ -29,6 +29,8 @@
                                         <th>Lastname</th>
                                         <th>Email</th>
                                         <th>Role</th>
+                                        <th></th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,6 +41,38 @@
                                         <td th:text="${user.lastName}"></td>
                                         <td th:text="${user.email}"></td>
                                         <td th:text="${user.role}"></td>
+                                        <td>
+                                            <a th:href="@{users/edit/{id}(id=${user.userId})}">
+                                                <button class="btn btn-primary">Edit</button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form th:action="@{/users/delete/{id}(id=${user.userId})}" method="post">
+                                                <button type="button" class="btn btn-danger" th:attr="data-bs-toggle='modal', data-bs-target='#deleteModalUser' + ${user.userId}">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                            <div class="modal fade" th:id="'deleteModalUser' + ${user.userId}"
+                                                tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Confirm deletion</h5>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Are you sure you want to delete the user <b th:text="${user.username}"></b>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                            <form th:id="'deleteFormUser' + ${user.userId}" th:action="@{/users/delete/{id}(id=${user.userId})}" method="post">
+                                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
