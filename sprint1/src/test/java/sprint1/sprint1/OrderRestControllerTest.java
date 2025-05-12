@@ -179,13 +179,8 @@ public class OrderRestControllerTest {
         assert updatedProductOpt.isPresent();
 
         Product updatedProduct = updatedProductOpt.get();
-        //int expectedStockAfterOrder = 50 - 5;
 
         logger.info("Testivaatteiden varastosaldo: " + updatedProduct.getAmount());
-
-
-       /*  assert updatedProduct.getAmount() == expectedStockAfterOrder
-                : "Expected stock: " + expectedStockAfterOrder + ", but was: " + updatedProduct.getAmount(); */
     }
 }
 
