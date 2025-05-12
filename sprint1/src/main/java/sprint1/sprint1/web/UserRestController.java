@@ -23,7 +23,10 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/users")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = {
+    "http://localhost:5173",
+    "https://ohjelmistoprojekti-team4.github.io/k25Tiimi4FrontEnd/"
+})
 public class UserRestController {
 
     private final UserRepository userRepository;
