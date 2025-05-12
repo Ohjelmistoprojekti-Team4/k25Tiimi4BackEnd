@@ -17,10 +17,12 @@ public class ClothingItem extends Product {
 
     @Enumerated(EnumType.STRING)
     private ClothingSize size;
-    
-    public ClothingItem() {}
 
-    public ClothingItem(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String color, ClothingSize size) {
+    public ClothingItem() {
+    }
+
+    public ClothingItem(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String color,
+            ClothingSize size) {
         super(name, price, amount, type, manufacturer);
         this.color = color;
         this.size = size;

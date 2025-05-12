@@ -1,6 +1,7 @@
 package sprint1.sprint1.domain;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -33,18 +34,36 @@ public class Order {
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
-    @JsonIgnoreProperties ("order")
-    private List<OrderProduct> orderProducts;
+    @JsonIgnoreProperties("order")
+    // alkup.: private List<OrderProduct> orderProducts;
+    // muutettu testejä varten, lista tulee alustaa:
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
     private LocalDateTime orderDate;
 
-    public Order() {}
+    public Order() {
+    }
 
     public Order(User user, LocalDateTime orderDate) {
 
         this.user = user;
         this.orderDate = orderDate;
+        this.orderProducts = new ArrayList<>(); // alustetaan lista myös tässä
     }
 
-    //getters & setters  are made automatically by Lombok
+    // getters & setters are made automatically by Lombok
+
+    public void addProductToOrder(Product product, int quantity) {
+        if (product.getAmount() >= quantity) {
+            //lisää tuote tilaukseen
+            OrderProduct orderProduct = new OrderProduct(this, product, quantity);
+            orderProducts.add(orderProduct); //tämä ei enää aiheuta NullPointerExceptionia
+
+            // päivitetään varastosaldo
+            product.updateStockQuantity(quantity);
+        } else {
+            throw new IllegalArgumentException("Not enough stock.");
+        }
+
+    }
 }

@@ -13,7 +13,8 @@ public class Toy extends Product {
     @Size(min = 2, max = 20, message = "Must be between 2-20 characters")
     private String material;
 
-    public Toy() {}
+    public Toy() {
+    }
 
     public Toy(String name, Double price, Integer amount, Type type, Manufacturer manufacturer, String material) {
         super(name, price, amount, type, manufacturer);
@@ -32,5 +33,4 @@ public class Toy extends Product {
     public String toString() {
         return super.toString() + " Toy [material=" + material + "]";
     }
-
 }
