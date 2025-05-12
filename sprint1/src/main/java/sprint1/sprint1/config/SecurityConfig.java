@@ -88,7 +88,7 @@ public class SecurityConfig {
         configuration.setAllowCredentials(true);
         configuration.setAllowedOriginPatterns(List.of(
                 "http://localhost:5173", 
-                "https://ohjelmistoprojekti-team4.github.io/k25Tiimi4FrontEnd/", 
+                "https://ohjelmistoprojekti-team4.github.io", 
                 "https://k25-tiimi4-op1.2.rahtiapp.fi" 
         ));
         configuration.addAllowedHeader("*");
