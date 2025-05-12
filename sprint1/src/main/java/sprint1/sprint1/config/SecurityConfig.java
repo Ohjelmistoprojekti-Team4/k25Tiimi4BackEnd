@@ -45,16 +45,11 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
-                        .requestMatchers("/api/users/delete").permitAll()
                         .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/error").permitAll()
-                        .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .requestMatchers("/css/**", "/images/**").permitAll()
-                        .requestMatchers("/api/products/**").permitAll()
-                        .requestMatchers("/api/manufacturers/**").permitAll()
-                        .requestMatchers("/api/users/profile").authenticated()
                         .anyRequest().hasRole("ADMIN"))
-                //.userDetailsService(userDetailsService)
+                // .userDetailsService(userDetailsService)
                 .formLogin(login -> login
                         .loginPage("/login")
                         .loginProcessingUrl("/perform-login")
@@ -72,31 +67,31 @@ public class SecurityConfig {
                         .defaultAuthenticationEntryPointFor(
                                 restAuthenticationEntryPoint(),
                                 new AntPathRequestMatcher("/api/**")));
-                                //jos reactin tekemä /api/** pyytnö epäonnistuu autentikoinnissa 
-                                // niin saat 401 virheen ilman redirectiä adminin login sivulle
+        // jos reactin tekemä /api/** pyytnö epäonnistuu autentikoinnissa
+        // niin saat 401 virheen ilman redirectiä adminin login sivulle
 
         return http.build();
     }
-    
+
     @Bean
-public AuthenticationEntryPoint restAuthenticationEntryPoint() {
-    return (request, response, authException) -> {
-        response.setContentType("application/json");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().write("{\"error\": \"Unauthorized - API access denied\"}");
-    };
-}
+    public AuthenticationEntryPoint restAuthenticationEntryPoint() {
+        return (request, response, authException) -> {
+            response.setContentType("application/json");
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            response.getWriter().write("{\"error\": \"Unauthorized - API access denied\"}");
+        };
+    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
         configuration.setAllowedOriginPatterns(List.of(
-                "http://localhost:5173",
+                "http://localhost:5173", 
                 "https://ohjelmistoprojekti-team4.github.io/k25Tiimi4FrontEnd/", 
-                "https://k25-tiimi4-op1.2.rahtiapp.fi"));
-        //configuration.addAllowedOrigin("http://localhost:5173");
-        configuration.addAllowedHeader("*"); 
+                "https://k25-tiimi4-op1.2.rahtiapp.fi" 
+        ));
+        configuration.addAllowedHeader("*");
         configuration.addAllowedMethod("*"); 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
