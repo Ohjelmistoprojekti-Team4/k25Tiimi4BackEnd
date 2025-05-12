@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import sprint1.sprint1.domain.ClothingItem;
 import sprint1.sprint1.domain.ClothingItemRepository;
@@ -37,7 +36,7 @@ public class Sprint1Application {
     public CommandLineRunner demo(ClothingItemRepository clothingItemRepository, ToyRepository toyRepository,
             FoodRepository foodRepository,
             ManufacturerRepository manufacturerRepository, UserRepository userRepository,
-            PasswordEncoder passwordEncoder, OrderRepository orderRepository,
+            OrderRepository orderRepository,
             OrderProductRepository orderProductRepository) {
         return (args) -> {
 
@@ -76,25 +75,23 @@ public class Sprint1Application {
                         "Esimerkki",
                         "Admin",
                         "admin",
-                        passwordEncoder.encode("admin"),
+                        "$2a$10$JD0ge/0wH26.WRos4d.u7uyptCaP2cOspQM/BaMsZ9XS8i/L1mfwC",
                         Role.ADMIN));
-                System.out.println("Admin user created with username: admin and password: admin");
 
                 userRepository.save(new User(
                         "user@example.com",
                         "Regular",
                         "User",
                         "user",
-                        passwordEncoder.encode("user"),
+                        "$2a$10$2L3ZGyLITfNvCuD4lISHE.jMjJEiDD3scMLDxzAwvaUtUOSave0sW",
                         Role.USER));
-                System.out.println("User created with username: user and password: user");
 
                 User testUser = userRepository.save(new User(
                         "testi@example.com",
                         "Teppo",
                         "Testaaja",
                         "testikäyttäjä",
-                        passwordEncoder.encode("password123"),
+                        "$2a$10$PQMtJIy9SC1yaxyRmLnCIOT9olxEBhTnLsJMhkH7DAYImaI5Tu9JW",
                         Role.USER));
 
                 Order order1 = orderRepository.save(new Order(testUser, LocalDateTime.now()));
