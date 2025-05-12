@@ -46,7 +46,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
                         .requestMatchers("/api/users/delete").permitAll()
-                        // .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/api/**").permitAll()
                         .requestMatchers("/error").permitAll()
                         .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .requestMatchers("/css/**", "/images/**").permitAll()
@@ -91,7 +91,10 @@ public AuthenticationEntryPoint restAuthenticationEntryPoint() {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:5173"));
+        configuration.setAllowedOriginPatterns(List.of(
+                "http://localhost:5173",
+                "https://ohjelmistoprojekti-team4.github.io/k25Tiimi4FrontEnd/", 
+                "https://k25-tiimi4-op1.2.rahtiapp.fi"));
         //configuration.addAllowedOrigin("http://localhost:5173");
         configuration.addAllowedHeader("*"); 
         configuration.addAllowedMethod("*"); 
