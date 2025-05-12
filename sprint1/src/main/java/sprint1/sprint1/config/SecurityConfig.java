@@ -9,18 +9,22 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.io.IOException;
+import java.util.List;
+
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -40,30 +44,55 @@ public class SecurityConfig {
         http
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()                        .requestMatchers("/api/users/delete").permitAll() 
-                        .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/h2-console/**", "swagger-ui/**").permitAll()
+                        .requestMatchers("/api/users/delete").permitAll()
+                        // .requestMatchers("/api/**").permitAll()
+                        .requestMatchers("/error").permitAll()
+                        .requestMatchers("/api/users/register", "/api/users/login").permitAll()
                         .requestMatchers("/css/**", "/images/**").permitAll()
+                        .requestMatchers("/api/products/**").permitAll()
+                        .requestMatchers("/api/manufacturers/**").permitAll()
+                        .requestMatchers("/api/users/profile").authenticated()
                         .anyRequest().hasRole("ADMIN"))
                 //.userDetailsService(userDetailsService)
                 .formLogin(login -> login
                         .loginPage("/login")
-                        .loginProcessingUrl("/perform-login") // react login for users
+                        .loginProcessingUrl("/perform-login")
                         .successHandler(customAuthenticationSuccessHandler())
                         .failureUrl("/login?error")
                         .permitAll())
                 .logout(logout -> logout
                         .logoutSuccessUrl("/login?logout")
                         .permitAll())
-                .csrf(csrf -> csrf.disable()); 
+                .sessionManagement(
+                        session -> session
+                                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED))
+                .csrf(csrf -> csrf.disable())
+                .exceptionHandling(ex -> ex
+                        .defaultAuthenticationEntryPointFor(
+                                restAuthenticationEntryPoint(),
+                                new AntPathRequestMatcher("/api/**")));
+                                //jos reactin tekemä /api/** pyytnö epäonnistuu autentikoinnissa 
+                                // niin saat 401 virheen ilman redirectiä adminin login sivulle
 
         return http.build();
     }
+    
+    @Bean
+public AuthenticationEntryPoint restAuthenticationEntryPoint() {
+    return (request, response, authException) -> {
+        response.setContentType("application/json");
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.getWriter().write("{\"error\": \"Unauthorized - API access denied\"}");
+    };
+}
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:5173");
+        configuration.setAllowedOriginPatterns(List.of("http://localhost:5173"));
+        //configuration.addAllowedOrigin("http://localhost:5173");
         configuration.addAllowedHeader("*"); 
         configuration.addAllowedMethod("*"); 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
