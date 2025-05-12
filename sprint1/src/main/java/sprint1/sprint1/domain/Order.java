@@ -35,10 +35,9 @@ public class Order {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     @JsonIgnoreProperties("order")
-    // alkup.: private List<OrderProduct> orderProducts;
-    // muutettu testejä varten, lista tulee alustaa:
-    private List<OrderProduct> orderProducts = new ArrayList<>();
 
+    private List<OrderProduct> orderProducts;
+  
     private LocalDateTime orderDate;
 
     public Order() {
@@ -53,17 +52,4 @@ public class Order {
 
     // getters & setters are made automatically by Lombok
 
-    public void addProductToOrder(Product product, int quantity) {
-        if (product.getAmount() >= quantity) {
-            //lisää tuote tilaukseen
-            OrderProduct orderProduct = new OrderProduct(this, product, quantity);
-            orderProducts.add(orderProduct); //tämä ei enää aiheuta NullPointerExceptionia
-
-            // päivitetään varastosaldo
-            product.updateStockQuantity(quantity);
-        } else {
-            throw new IllegalArgumentException("Not enough stock.");
-        }
-
-    }
 }
