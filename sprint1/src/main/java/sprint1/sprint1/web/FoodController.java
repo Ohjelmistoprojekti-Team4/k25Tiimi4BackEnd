@@ -26,8 +26,6 @@ public class FoodController {
     @Autowired
     ManufacturerRepository manufacturerRepository;
 
-    // TODO: add foods to add form
-
     @PostMapping("/savefood")
     public String saveFood(@Valid @ModelAttribute Food food, BindingResult result, Model model) {
         if (result.hasErrors()) {
