@@ -35,26 +35,6 @@ public class ClothingItemController {
         return "clothingItemlist";
     }
 
-    // @GetMapping("/addclothing")
-    // public String addClothing(Model model) {
-    //     model.addAttribute("clothing", new ClothingItem());
-    //     model.addAttribute("manufacturers", manufacturerRepository.findAll());
-    //     return "addclothing";
-    // }
-
-    // @PostMapping("/saveclothing")
-    // public String saveClothing(@Valid @ModelAttribute("clothing") ClothingItem clothing, BindingResult result, Model model) {
-    //     if (result.hasErrors()) {
-    //         model.addAttribute("clothing", clothing);
-    //         model.addAttribute("manufacturers", manufacturerRepository.findAll());
-    //         return "addclothing";
-    //     } else {
-    //         clothing.setType(Type.CLOTHING);
-    //         clothingItemRepository.save(clothing);
-    //         return "redirect:/productlist";
-    //     }
-    // } Tämän voi poistaa, kun kaikille tuotteille sopiva lisäyslomake on testattu
-
     @PostMapping("/clothings/delete/{id}")
     public String deleteClothing(@PathVariable("id") Long clothingId) {
         clothingItemRepository.deleteById(clothingId);

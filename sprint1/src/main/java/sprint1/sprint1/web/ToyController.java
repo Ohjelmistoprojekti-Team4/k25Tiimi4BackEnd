@@ -35,26 +35,6 @@ public class ToyController {
         return "toylist";
     }
 
-    // @GetMapping("/addtoy")
-    // public String addToy(Model model) {
-    //     model.addAttribute("toy", new Toy());
-    //     model.addAttribute("manufacturers", manufacturerRepository.findAll());
-    //     return "addtoy";
-    // }
-
-    // @PostMapping("/savetoy")
-    // public String saveToy(@Valid @ModelAttribute Toy toy, BindingResult result, Model model) {
-    //     if (result.hasErrors()) {
-    //         model.addAttribute("toy", toy);
-    //         model.addAttribute("manufacturers", manufacturerRepository.findAll());
-    //         return "addtoy";
-    //     } else {
-    //         toy.setType(Type.TOY);
-    //         toyRepository.save(toy);
-    //         return "redirect:/productlist";
-    //     }
-    // } Tämän voi poistaa, kun kaikille tuotteille sopiva lisäyslomake on testattu
-
     @PostMapping("/toys/delete/{id}")
     public String deleteToy(@PathVariable("id") Long toyId) {
         toyRepository.deleteById(toyId);
