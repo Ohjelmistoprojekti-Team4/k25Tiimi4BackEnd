@@ -1,4 +1,4 @@
-#Ohjelmistoprojekti 1-opintojaksolla toteutetun ohjelmiston back end.
+# Ohjelmistoprojekti 1-opintojaksolla toteutetun ohjelmiston back end.
 
 Rakennettu Spring Boot-sovelluskehystä käyttäen.
 
