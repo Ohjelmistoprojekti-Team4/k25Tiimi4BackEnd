@@ -1,27 +1,27 @@
 # Ohjelmistoprojekti 1 -opintojaksolla toteutetun ohjelmiston back end
-![Java](https://img.shields.io/badge/Java-17-blue?logo=java) 
-![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.4-brightgreen?logo=springboot)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.6.1-blue?logo=postgresql)
+[![Java](https://img.shields.io/badge/Java-17-blue?logo=java)](https://www.oracle.com/java/)
+[![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.4.4-brightgreen?logo=springboot)](https://spring.io/projects/spring-boot)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-42.6.1-blue?logo=postgresql)](https://www.postgresql.org/)
 
-Projektin tavoitteena oli kehittää koirantuotteita myyvälle yritykselle järjestelmä varastonhallintaan ja asiakastoimintojen tukemiseen. 
+Projektin tavoitteena oli kehittää koirantuotteita myyvälle yritykselle järjestelmä varastonhallintaan ja asiakastoimintojen tukemiseen.
 
 Järjestelmän kautta admin-käyttäjä pystyy selaamaan ja hallitsemaan
 - tuotteita sekä niiden valmistajia 🛒
 - asiakkaiden tekemiä tilauksia 📦
 - palveluun rekisteröityneitä käyttäjiä 👤
 
-Backend sisältää **REST-rajapinnan**, joka mahdollistaa käyttäjien rekisteröitymisen, kirjautumisen, tietojen tarkastelun ja tilin poistamisen. Lisäksi rajapinnan kautta voidaan hakea tietoja tuotteista ja valmistajista.
+Backend sisältää **REST-rajapinnan**, joka mahdollistaa käyttäjien rekisteröitymisen, kirjautumisen, tietojen tarkastelun ja tilin poistamisen. Lisäksi rajapinnan kautta voidaan hakea tietoja tuotteista ja valmistajista sekä tehdä tilauksia. Rajapintaa hyödynnettiin asiakaspuolen sovelluksen eli frontendin toteuttamisessa.
 
-🔗 Tsekkaa myös frontend [GitHubissa](https://github.com/Ohjelmistoprojekti-Team4/k25Tiimi4FrontEnd)
+🔗 Tsekkaa frontend [GitHubissa](https://github.com/Ohjelmistoprojekti-Team4/k25Tiimi4FrontEnd)
 
 ## Mitä opimme
-Projekti vahvisti osaamistamme fullstack-kehityksessä. Backendin keskeisiä osa-alueita olivat tietokannan ja REST-rajapinnan suunnittelu ja toteutus, käyttäjähallinta ja autentikointi Spring Securityllä sekä PostgreSQL:n hyödyntäminen JPA:n avulla.
+Backendin toteuttaminen vahvisti osaamistamme Spring Bootin ja fullstack-kehityksen parissa. Kaikilla tiimiläisillä oli jonkin verran aiempaa kokemusta Spring Bootista, mutta kehityimme erityisesti tietokannan ja REST-rajapinnan suunnittelussa ja toteutuksessa, sekä Spring Securityn ja autentikoinnin parissa. PostgreSQL-tietokanta oli meille uusi tuttavuus, ja sen hyödyntäminen JPA:n avulla syvensi ymmärrystämme relaatiotietokantojen käytöstä Java-sovelluksissa.
 
-Rakensimme backendin ja frontendin itsenäisinä sovelluksina, jotka kommunikoivat REST-rajapinnan kautta. Tämä oli monelle tiimiläiselle uutta, ja sovellusten yhdistäminen osoittautui yhdeksi projektin haastavimmista kohdista — esimerkiksi REST-rajapinnan yli toteutettu kirjautumisominaisuus ei toiminut täysin ongelmitta. Lisäksi harjoittelimme molempien sovellusten erillistä julkaisemista pilvipalveluihin (backend Rahtiin, frontend GitHub Pagesiin), mikä antoi arvokasta käytännön kokemusta nykyaikaisista julkaisuprosesseista ja palveluiden hallinnasta.
+Rakensimme backendin ja frontendin itsenäisinä sovelluksina, jotka kommunikoivat REST-rajapinnan kautta. Tämä oli monelle tiimiläiselle uutta, ja sovellusten yhdistäminen osoittautui yhdeksi projektin haastavimmista kohdista — esimerkiksi REST-rajapinnan yli toteutettu kirjautumisominaisuus ei toiminut täysin ongelmitta. Lisäksi harjoittelimme molempien sovellusten erillistä julkaisemista pilvipalveluihin (backend Rahtiin, frontend GitHub Pagesiin), mikä antoi arvokasta käytännön kokemusta julkaisuprosesseista ja palveluiden hallinnasta.
 
-Tiimityöskentelyssä hyödynsimme scrum-menetelmää. Jatkuva kommunikointi, sprinttien suunnittelu ja tehtävien hallinta GitHubin kautta olivat onnistumisen kannalta keskeisiä. Selkeä vastuunjako helpotti työn organisointia ja kehitti yhteistyötaitoja sekä ratkaisukeskeistä työotetta.
+Tiimityöskentelyssä hyödynsimme scrum-menetelmää ensimmäistä kertaa. Opimme suunnittelemaan sprinttejä, hallitsemaan tehtäviä GitHubin avulla, sekä ylläpitämään tiimiviestintää tehokkaasti. Selkeä vastuunjako auttoi työn organisoinnissa ja vahvisti tiimityö- sekä ongelmanratkaisutaitoja.
 
-Kaiken kaikkiaan projekti tarjosi käytännönläheisen katsauksen modernin sovelluskehityksen keskeisiin teknologioihin sekä tiimityön haasteisiin.
+Kaiken kaikkiaan projekti tarjosi käytännönläheisen katsauksen modernin sovelluskehityksen keskeisiin teknologioihin, ketterän kehityksen toimintatapoihin, sekä tiimityön haasteisiin.
 
 ## Kuvia käyttöliittymästä
 <img src="https://github.com/user-attachments/assets/4de9f556-da6b-4f45-8cfd-c72a5786e311" width="800" />
